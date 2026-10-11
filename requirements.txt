@@ -1,0 +1,10 @@
+# Probado con estas versiones (CPU, sin GPU) en octubre 2026.
+# torch se deja sin version exacta a proposito: en una sesion cloud con GPU, pip debe
+# poder resolver la build con soporte CUDA en vez de forzar la build CPU usada aqui.
+numpy>=2.5
+scipy>=1.18
+scikit-image>=0.26
+tifffile>=2024.1
+matplotlib>=3.9
+transformers>=5.19
+torch>=2.14

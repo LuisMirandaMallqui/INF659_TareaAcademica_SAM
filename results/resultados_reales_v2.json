@@ -1,0 +1,424 @@
+{
+  "modelo": "facebook/sam-vit-base",
+  "banda_usada": "VH",
+  "n_prompts": {
+    "positivos": 3,
+    "negativos": 2
+  },
+  "criterio_exclusion": "nodata_etiqueta > 0.95",
+  "log_exclusion_10_chips_originales": [
+    {
+      "chip": "Ghana_5079",
+      "frac_nodata_label": 1.0,
+      "excluded": true
+    },
+    {
+      "chip": "India_1050276",
+      "frac_nodata_label": 0.026546478271484375,
+      "excluded": false
+    },
+    {
+      "chip": "Mekong_1149855",
+      "frac_nodata_label": 0.14255142211914062,
+      "excluded": false
+    },
+    {
+      "chip": "Nigeria_31096",
+      "frac_nodata_label": 0.17035293579101562,
+      "excluded": false
+    },
+    {
+      "chip": "Pakistan_43105",
+      "frac_nodata_label": 0.001789093017578125,
+      "excluded": false
+    },
+    {
+      "chip": "Paraguay_305760",
+      "frac_nodata_label": 0.0,
+      "excluded": false
+    },
+    {
+      "chip": "Somalia_12849",
+      "frac_nodata_label": 0.27024078369140625,
+      "excluded": false
+    },
+    {
+      "chip": "Spain_1199913",
+      "frac_nodata_label": 3.814697265625e-06,
+      "excluded": false
+    },
+    {
+      "chip": "Sri-Lanka_85652",
+      "frac_nodata_label": 0.247100830078125,
+      "excluded": false
+    },
+    {
+      "chip": "USA_826217",
+      "frac_nodata_label": 6.866455078125e-05,
+      "excluded": false
+    }
+  ],
+  "n_chips_evaluados": 9,
+  "verificacion_coordenadas_todas_ok": true,
+  "resultados": {
+    "umbral_otsu_sin_apertura": {
+      "global_iou": 0.1592855732390801,
+      "mean_per_chip_iou": 0.16255904831766677,
+      "casos_iou_no_definido": 0,
+      "tp": 120191,
+      "fp": 589699,
+      "fn": 44673
+    },
+    "umbral_otsu_con_apertura": {
+      "global_iou": 0.1875326163364014,
+      "mean_per_chip_iou": 0.19235136452321197,
+      "casos_iou_no_definido": 0,
+      "tp": 113915,
+      "fp": 442577,
+      "fn": 50949
+    },
+    "sam_con_prompts_automaticos": {
+      "global_iou": 0.08974724001404935,
+      "mean_per_chip_iou": 0.08194007931763209,
+      "casos_iou_no_definido": 0,
+      "tp": 153823,
+      "fp": 1549094,
+      "fn": 11041
+    }
+  },
+  "entorno": {
+    "torch": "2.14.1+cpu",
+    "transformers": "5.19.0",
+    "skimage": "0.26.0",
+    "scipy": "1.18.1",
+    "numpy": "2.5.3",
+    "python": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+    "device": "cpu"
+  },
+  "per_chip": [
+    {
+      "chip": "India_1050276",
+      "otsu_threshold_dB": -18.369403839111328,
+      "n_pos_prompts": 3,
+      "n_neg_prompts": 2,
+      "verificacion_coordenadas_ok": true,
+      "water_frac_gt": 0.19203714951897644,
+      "water_frac_threshold_opened": 0.24621353135960186,
+      "water_frac_sam": 0.9756333640300174,
+      "iou_threshold_raw": {
+        "iou": 0.40953105083078023,
+        "tp": 36626,
+        "fp": 40429,
+        "fn": 12379,
+        "union": 89434
+      },
+      "iou_threshold_opened": {
+        "iou": 0.44833972233733943,
+        "tp": 34619,
+        "fp": 28211,
+        "fn": 14386,
+        "union": 77216
+      },
+      "iou_sam": {
+        "iou": 0.18849366210103943,
+        "tp": 47258,
+        "fp": 201709,
+        "fn": 1747,
+        "union": 250714
+      },
+      "sam_mask_scores_candidatas": [
+        0.9653438329696655,
+        0.7948337197303772,
+        0.5253685712814331
+      ]
+    },
+    {
+      "chip": "Mekong_1149855",
+      "otsu_threshold_dB": -17.412837982177734,
+      "n_pos_prompts": 3,
+      "n_neg_prompts": 2,
+      "verificacion_coordenadas_ok": true,
+      "water_frac_gt": 0.07678789901012123,
+      "water_frac_threshold_opened": 0.105883661439217,
+      "water_frac_sam": 0.4416060504949394,
+      "iou_threshold_raw": {
+        "iou": 0.34769192791903236,
+        "tp": 14085,
+        "fp": 23250,
+        "fn": 3175,
+        "union": 40510
+      },
+      "iou_threshold_opened": {
+        "iou": 0.49630115520571405,
+        "tp": 13619,
+        "fp": 10181,
+        "fn": 3641,
+        "union": 27441
+      },
+      "iou_sam": {
+        "iou": 0.1295816974455916,
+        "tp": 13367,
+        "fp": 85895,
+        "fn": 3893,
+        "union": 103155
+      },
+      "sam_mask_scores_candidatas": [
+        0.9243124127388,
+        0.7553247213363647,
+        0.7666805982589722
+      ]
+    },
+    {
+      "chip": "Nigeria_31096",
+      "otsu_threshold_dB": -15.287650108337402,
+      "n_pos_prompts": 3,
+      "n_neg_prompts": 2,
+      "verificacion_coordenadas_ok": true,
+      "water_frac_gt": 0.003751948392317702,
+      "water_frac_threshold_opened": 0.2941968945270292,
+      "water_frac_sam": 0.9749134431023464,
+      "iou_threshold_raw": {
+        "iou": 0.007361936622386783,
+        "tp": 680,
+        "fp": 91551,
+        "fn": 136,
+        "union": 92367
+      },
+      "iou_threshold_opened": {
+        "iou": 0.010337246831002386,
+        "tp": 663,
+        "fp": 63321,
+        "fn": 153,
+        "union": 64137
+      },
+      "iou_sam": {
+        "iou": 0.0035077297350815406,
+        "tp": 744,
+        "fp": 211287,
+        "fn": 72,
+        "union": 212103
+      },
+      "sam_mask_scores_candidatas": [
+        0.9418162107467651,
+        0.7473976016044617,
+        0.6335506439208984
+      ]
+    },
+    {
+      "chip": "Pakistan_43105",
+      "otsu_threshold_dB": -20.187549591064453,
+      "n_pos_prompts": 3,
+      "n_neg_prompts": 2,
+      "verificacion_coordenadas_ok": true,
+      "water_frac_gt": 0.0010356358077768225,
+      "water_frac_threshold_opened": 0.22701060475781026,
+      "water_frac_sam": 0.2118276488009936,
+      "iou_threshold_raw": {
+        "iou": 0.0008009718458396188,
+        "tp": 60,
+        "fp": 74638,
+        "fn": 211,
+        "union": 74909
+      },
+      "iou_threshold_opened": {
+        "iou": 0.0006036419732385392,
+        "tp": 36,
+        "fp": 59367,
+        "fn": 235,
+        "union": 59638
+      },
+      "iou_sam": {
+        "iou": 0.00035918895134785654,
+        "tp": 20,
+        "fp": 55410,
+        "fn": 251,
+        "union": 55681
+      },
+      "sam_mask_scores_candidatas": [
+        0.9391871690750122,
+        0.9205131530761719,
+        0.8406438827514648
+      ]
+    },
+    {
+      "chip": "Paraguay_305760",
+      "otsu_threshold_dB": -18.63060760498047,
+      "n_pos_prompts": 3,
+      "n_neg_prompts": 2,
+      "verificacion_coordenadas_ok": true,
+      "water_frac_gt": 0.16704940795898438,
+      "water_frac_threshold_opened": 0.35007476806640625,
+      "water_frac_sam": 0.9970436096191406,
+      "iou_threshold_raw": {
+        "iou": 0.3335161044979394,
+        "tp": 37712,
+        "fp": 69283,
+        "fn": 6079,
+        "union": 113074
+      },
+      "iou_threshold_opened": {
+        "iou": 0.3723665961388554,
+        "tp": 36782,
+        "fp": 54988,
+        "fn": 7009,
+        "union": 98779
+      },
+      "iou_sam": {
+        "iou": 0.16700447435848406,
+        "tp": 43670,
+        "fp": 217699,
+        "fn": 121,
+        "union": 261490
+      },
+      "sam_mask_scores_candidatas": [
+        0.9851772785186768,
+        0.9688931107521057,
+        0.9144965410232544
+      ]
+    },
+    {
+      "chip": "Somalia_12849",
+      "otsu_threshold_dB": -23.758953094482422,
+      "n_pos_prompts": 3,
+      "n_neg_prompts": 2,
+      "verificacion_coordenadas_ok": true,
+      "water_frac_gt": 0.19441511327639022,
+      "water_frac_threshold_opened": 0.3108017689308005,
+      "water_frac_sam": 0.9677734681289271,
+      "iou_threshold_raw": {
+        "iou": 0.1857133483519608,
+        "tp": 16982,
+        "fp": 54250,
+        "fn": 20210,
+        "union": 91442
+      },
+      "iou_threshold_opened": {
+        "iou": 0.1769526778538201,
+        "tp": 14531,
+        "fp": 44926,
+        "fn": 22661,
+        "union": 82118
+      },
+      "iou_sam": {
+        "iou": 0.19806760681780217,
+        "tp": 36756,
+        "fp": 148381,
+        "fn": 436,
+        "union": 185573
+      },
+      "sam_mask_scores_candidatas": [
+        0.9870440363883972,
+        0.9239002466201782,
+        0.5849806070327759
+      ]
+    },
+    {
+      "chip": "Spain_1199913",
+      "otsu_threshold_dB": -19.69176483154297,
+      "n_pos_prompts": 3,
+      "n_neg_prompts": 2,
+      "verificacion_coordenadas_ok": true,
+      "water_frac_gt": 0.03849044223954101,
+      "water_frac_threshold_opened": 0.1993186924693774,
+      "water_frac_sam": 0.9734381616140808,
+      "iou_threshold_raw": {
+        "iou": 0.11851250996461687,
+        "tp": 8474,
+        "fp": 61413,
+        "fn": 1616,
+        "union": 71503
+      },
+      "iou_threshold_opened": {
+        "iou": 0.15265143110716664,
+        "tp": 8256,
+        "fp": 43994,
+        "fn": 1834,
+        "union": 54084
+      },
+      "iou_sam": {
+        "iou": 0.035798236640088715,
+        "tp": 9168,
+        "fp": 246012,
+        "fn": 922,
+        "union": 256102
+      },
+      "sam_mask_scores_candidatas": [
+        0.9862521886825562,
+        0.9063982367515564,
+        0.5828642845153809
+      ]
+    },
+    {
+      "chip": "Sri-Lanka_85652",
+      "otsu_threshold_dB": -14.16193675994873,
+      "n_pos_prompts": 3,
+      "n_neg_prompts": 2,
+      "verificacion_coordenadas_ok": true,
+      "water_frac_gt": 0.009834420980098091,
+      "water_frac_threshold_opened": 0.3469711402050991,
+      "water_frac_sam": 0.9765007498682664,
+      "iou_threshold_raw": {
+        "iou": 0.01546728209431895,
+        "tp": 1327,
+        "fp": 83853,
+        "fn": 614,
+        "union": 85794
+      },
+      "iou_threshold_opened": {
+        "iou": 0.017556027569465515,
+        "tp": 1215,
+        "fp": 67266,
+        "fn": 726,
+        "union": 69207
+      },
+      "iou_sam": {
+        "iou": 0.010065843066242587,
+        "tp": 1940,
+        "fp": 190790,
+        "fn": 1,
+        "union": 192731
+      },
+      "sam_mask_scores_candidatas": [
+        0.9533101916313171,
+        0.9280934929847717,
+        0.7663486003875732
+      ]
+    },
+    {
+      "chip": "USA_826217",
+      "otsu_threshold_dB": -17.76964569091797,
+      "n_pos_prompts": 3,
+      "n_neg_prompts": 2,
+      "verificacion_coordenadas_ok": true,
+      "water_frac_gt": 0.01715968656295064,
+      "water_frac_threshold_opened": 0.2842793160541114,
+      "water_frac_sam": 0.7355661017983718,
+      "iou_threshold_raw": {
+        "iou": 0.04443630273212603,
+        "tp": 4245,
+        "fp": 91032,
+        "fn": 253,
+        "union": 95530
+      },
+      "iou_threshold_opened": {
+        "iou": 0.05605378169230563,
+        "tp": 4194,
+        "fp": 70323,
+        "fn": 304,
+        "union": 74821
+      },
+      "iou_sam": {
+        "iou": 0.004582274743010758,
+        "tp": 900,
+        "fp": 191911,
+        "fn": 3598,
+        "union": 196409
+      },
+      "sam_mask_scores_candidatas": [
+        0.9620700478553772,
+        0.783293604850769,
+        0.5403859615325928
+      ]
+    }
+  ]
+}

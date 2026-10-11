@@ -1,0 +1,64 @@
+{
+  "modelo": "facebook/sam-vit-base",
+  "parametros": {
+    "total": 93735728,
+    "vision_encoder": 89670912,
+    "prompt_encoder": 6476,
+    "mask_decoder": 4058340,
+    "pct_encoder_del_total": 95.66,
+    "pct_decoder_del_total": 4.3296,
+    "razon_encoder_sobre_decoder": 22.1
+  },
+  "flops": {
+    "formula": "bloque global: 24*N*D^2 + 4*N^2*D. bloque ventaneado: 24*N*D^2 + 4*num_windows*w_tokens^2*D",
+    "verificado_del_modelo_real": {
+      "window_size": 14,
+      "global_attn_indexes": [
+        2,
+        5,
+        8,
+        11
+      ],
+      "capas_globales": 4,
+      "capas_ventaneadas": 8,
+      "num_windows": 25,
+      "tokens_por_ventana": 196
+    },
+    "N_parches": 4096,
+    "D_dim_oculta": 768,
+    "L_capas": 12,
+    "patch_size": 16,
+    "resolucion_interna": 1024,
+    "flops_patch_embedding": 4831838208,
+    "gflops_por_bloque_global": 109.52,
+    "gflops_por_bloque_ventaneado": 60.9324,
+    "flops_totales_vision_encoder": 930377760768,
+    "gflops_totales_vision_encoder": 930.38,
+    "gflops_totales_version_anterior_incorrecta": 1319.09,
+    "reduccion_pct_por_la_correccion": 29.5,
+    "nota": "calculado a partir de la configuracion real del modelo cargado (facebook/sam-vit-base), no de un forward pass instrumentado: thop sobre 12 capas en 4096 parches no termino en tiempo razonable en la CPU de este contenedor. La formula si distingue ahora atencion global de ventaneada segun la config real; no desglosa el pequeno overhead de padding de las capas ventaneadas (grilla 64x64 rellenada a 70x70 para ser divisible entre ventanas de 14x14)."
+  },
+  "campo_receptivo": {
+    "patch_size": 16,
+    "image_size_interno": 1024,
+    "campo_receptivo_capa_de_parches": "16x16 pixeles (convolucion local de patchify)",
+    "campo_receptivo_capas_ventaneadas_0_y_1": "se queda en la ventana, 14x14 parches equivalentes a 224x224 pixeles; no crece a la imagen completa porque SAM usa ventanas fijas, sin desplazamiento entre capas (a diferencia de Swin), asi que una segunda capa ventaneada no amplia el area ya cubierta por la primera.",
+    "campo_receptivo_capa_global_mas_temprana": "la capa de indice 2 (la primera de las 4 capas marcadas global_attn_indexes=[2, 5, 8, 11]) es donde el campo receptivo se vuelve global por primera vez: ahi cada parche atiende a los 4096 parches de la imagen. Antes de esa capa el campo receptivo NO es global.",
+    "nota": "en una CNN el campo receptivo crece gradualmente con la profundidad; en SAM crece en escalones (ventana, ventana, imagen completa, ventana, ventana, imagen completa...) siguiendo el patron fijo de global_attn_indexes, no gradualmente capa por capa como en un ViT con atencion global pura."
+  },
+  "latencia": {
+    "n_repeticiones": 5,
+    "calentamiento": 1,
+    "media_ms": 12424.115067200002,
+    "desviacion_ms": 438.9304266708693,
+    "min_ms": 11824.178547999963,
+    "max_ms": 13101.005149999992,
+    "hardware": "CPU de este contenedor en la nube (2 vCPU), NO la laptop RTX 3060"
+  },
+  "memoria": {
+    "pico_rss_kb_total_proceso": 2560964,
+    "pico_rss_mb_total_proceso": 2500.9,
+    "nota": "pico de memoria residente de TODO el proceso python (modelo + pesos + activaciones), medido con resource.getrusage; no es memoria aislada solo-forward-pass ni memoria de GPU.",
+    "hardware": "CPU de este contenedor en la nube, NO la laptop RTX 3060"
+  }
+}
