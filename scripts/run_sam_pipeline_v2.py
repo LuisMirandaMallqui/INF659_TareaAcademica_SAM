@@ -1,34 +1,25 @@
 """
-Pipeline real v2: corrige la fuga senalada por la revision de ChatGPT sobre el v1.
+Pipeline v2: SAM con prompts automaticos vs umbral de Otsu sobre Sentinel-1 (Sen1Floods11).
 
-Cambio central (punto 1 de la revision): v1 usaba `valid = label != -1` (validez de la
-ETIQUETA) para restringir donde se muestreaban los prompts negativos. Eso significa que
-la generacion de prompts, que se presenta como automatica y sin intervencion humana,
-en realidad "sabia" en que pixeles el anotador humano habia dejado la mascara sin dato
-(tipicamente por nubes en la imagen optica usada para etiquetar). No revela la clase
-agua/no-agua, pero si filtra metadato derivado de la referencia hacia el paso de
-inferencia, lo cual rompe la afirmacion de independencia del pipeline respecto a LabelHand.
+Que se corrigio: en el v1 los puntos negativos se sacaban solo donde la etiqueta tenia dato
+(label != -1). Eso no revela si un pixel es agua, pero cuela informacion de LabelHand (los
+huecos que dejo el anotador, casi siempre nubes) en una etapa que se presenta como
+automatica. La revision de ChatGPT al v1 lo marco y aqui se cierra separando dos mascaras:
+  sensor_valid: sale solo del radar (VV y VH finitos). Es lo unico que ven los prompts y el umbral.
+  label_valid:  sale solo de LabelHand (-1 = sin dato). Solo se usa para calcular el IoU.
 
-v2 separa explicitamente dos variables que v1 confundia bajo un solo nombre:
-  - sensor_valid: SOLO viene del propio radar (VV y VH finitos). Es lo unico que puede
-    tocar la generacion de prompts y el umbral.
-  - label_valid: SOLO viene de LabelHand (-1 = sin dato). Se usa EXCLUSIVAMENTE para
-    evaluar (IoU), nunca para generar prompts.
+De la misma revision:
+  - Otsu se reporta con apertura (pipeline operativo) y sin apertura (referencia).
+  - Se comprueba por codigo que los puntos positivos caen en agua segun el umbral y los
+    negativos fuera (orden x,y).
+  - Un chip sin puntos positivos igual se evalua, con mascara vacia, en vez de descartarse.
+  - Se cuentan los casos con union = 0 (IoU no definido), por metodo.
+  - Se guardan TP/FP/FN, los prompts, los 3 scores de SAM y las versiones de las librerias.
+  - El criterio de exclusion (mas de 95% de la etiqueta sin dato) se fija antes de usarlo
+    y se registra para los 10 chips.
 
-Tambien se atienden, del mismo informe de revision:
-  - punto 2: se reporta Otsu CON apertura (pipeline operativo) y SIN apertura (referencia).
-  - punto 3: se verifica por codigo, no solo se afirma, que cada punto positivo cae en
-    water_thr==True y cada punto negativo en water_thr==False (orden de coordenadas x,y).
-  - punto 4: el chip sin prompts positivos ahora SIEMPRE tiene iou_sam definido (se compara
-    una mascara vacia contra la verdad de terreno), nunca se excluye solo del lado SAM.
-  - punto 5: se cuentan y reportan los casos de union=0 (IoU no definido), por metodo.
-  - punto 6: se guardan TP/FP/FN, conteo de pixeles validos, prompts, scores de las 3
-    mascaras candidatas de SAM, version de librerias y configuracion completa.
-  - punto 7: el criterio de exclusion (nodata de ETIQUETA > 95%) se declara antes de
-    aplicarlo y se registra para los 10 chips originales, no solo para el excluido.
-
-No se toca el hallazgo central del v1 (SAM tiende a sobre-predecir agua); el objetivo de
-v2 es confirmar si ese hallazgo se sostiene una vez cerrada la fuga, no asumirlo.
+El hallazgo del v1 (SAM tiende a sobre-predecir agua) no se da por hecho: esta version sirve
+para ver si sobrevive sin la fuga.
 """
 import glob
 import json
@@ -56,7 +47,7 @@ N_POS = 3
 N_NEG = 2
 MODEL_ID = "facebook/sam-vit-base"
 BAND_USED = "VH"
-NODATA_EXCLUSION_THRESHOLD = 0.95  # declarado ANTES de aplicarlo (punto 7)
+NODATA_EXCLUSION_THRESHOLD = 0.95  # se fija antes de aplicarlo
 
 
 def normalize_band(band, lo_pct=2, hi_pct=98):
@@ -93,7 +84,7 @@ def sample_interior_points(mask, n_points):
             y, x = np.unravel_index(fi, dist.shape)
             if any(abs(y - py) < 15 and abs(x - px) < 15 for py, px in seen):
                 continue
-            points.append((int(x), int(y)))  # (x=columna, y=fila), convencion de SAM
+            points.append((int(x), int(y)))  # SAM espera (x=columna, y=fila)
             seen.add((y, x))
             picked += 1
             remaining -= 1
@@ -103,8 +94,8 @@ def sample_interior_points(mask, n_points):
 
 
 def verify_point_labels(points, labels_pt, mask):
-    """Punto 3 de la revision: confirmar por codigo que cada punto cae en la clase que
-    se le asigno, usando el mismo orden de coordenadas (x,y) que recibe el procesador."""
+    """Revisa que cada punto caiga en la clase asignada (positivo en agua, negativo fuera),
+    con el mismo orden (x,y) que recibe el procesador."""
     ok = True
     for (x, y), lab in zip(points, labels_pt):
         val = bool(mask[y, x])
@@ -136,7 +127,7 @@ def main():
     processor = SamProcessor.from_pretrained(MODEL_ID)
     print("Modelo cargado.\n")
 
-    # --- punto 7: declarar y registrar el criterio de exclusion para TODOS los chips originales ---
+    # criterio de exclusion: se registra para los 10 chips, no solo para el excluido
     all_s1 = sorted(glob.glob(os.path.join(CHIPS_DIR, "*_S1Hand.tif")))
     exclusion_log = []
     for s1_path in all_s1:
@@ -167,12 +158,12 @@ def main():
         s1 = tifffile.imread(os.path.join(CHIPS_DIR, f"{name}_S1Hand.tif"))
         label = tifffile.imread(os.path.join(CHIPS_DIR, f"{name}_LabelHand.tif"))
 
-        label_valid = label != -1          # SOLO para evaluacion
+        label_valid = label != -1          # solo para evaluar
         vv, vh = s1[0], s1[1]
-        sensor_valid = np.isfinite(vv) & np.isfinite(vh)   # SOLO para inferencia/prompts
+        sensor_valid = np.isfinite(vv) & np.isfinite(vh)   # para prompts y umbral
         gt_water = (label == 1) & label_valid
 
-        # --- baseline: Otsu real sobre VH, usando unicamente validez del sensor ---
+        # baseline: Otsu sobre VH (solo validez del sensor)
         thr = threshold_otsu(vh[sensor_valid])
         water_thr_raw = (vh < thr) & sensor_valid
         water_thr_opened = binary_opening(water_thr_raw, disk(1)) & sensor_valid
@@ -180,7 +171,7 @@ def main():
         thr_raw_res = iou_components(water_thr_raw, gt_water, label_valid)
         thr_opened_res = iou_components(water_thr_opened, gt_water, label_valid)
 
-        # --- prompts automaticos: SOLO desde el umbral + validez del SENSOR, nunca de la etiqueta ---
+        # prompts: salen del umbral y del sensor, nunca de la etiqueta
         pos_pts = sample_interior_points(water_thr_opened, N_POS)
         neg_pts = sample_interior_points(~water_thr_opened & sensor_valid, N_NEG)
 
@@ -205,7 +196,7 @@ def main():
             best = int(np.argmax(sam_scores))
             sam_mask = masks[0, best].numpy().astype(bool)
 
-        # punto 4: SIEMPRE se evalua SAM, incluso con mascara vacia, para mantener pares completos
+        # SAM se evalua siempre (mascara vacia si no hubo prompts) para no perder pares
         sam_res = iou_components(sam_mask, gt_water, label_valid)
 
         water_frac_gt = float(gt_water[label_valid].mean()) if label_valid.sum() else 0.0
