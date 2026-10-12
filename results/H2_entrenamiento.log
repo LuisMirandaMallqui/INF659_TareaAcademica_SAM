@@ -1,0 +1,108 @@
+[H2-barrido seed=0 lr=3e-05] epoca 1/12 perdida=1.1651 t=0.2min
+[H2-barrido seed=0 lr=3e-05] epoca 2/12 perdida=1.0162 t=0.3min
+[H2-barrido seed=0 lr=3e-05] epoca 3/12 perdida=0.9265 t=0.5min
+[H2-barrido seed=0 lr=3e-05] epoca 4/12 perdida=0.8780 t=0.6min
+[H2-barrido seed=0 lr=3e-05] epoca 5/12 perdida=0.8974 t=0.8min
+[H2-barrido seed=0 lr=3e-05] epoca 6/12 perdida=0.8688 t=0.9min
+[H2-barrido seed=0 lr=3e-05] epoca 7/12 perdida=0.8349 t=1.1min
+[H2-barrido seed=0 lr=3e-05] epoca 8/12 perdida=0.8270 t=1.2min
+[H2-barrido seed=0 lr=3e-05] epoca 9/12 perdida=0.7982 t=1.4min
+[H2-barrido seed=0 lr=3e-05] epoca 10/12 perdida=0.7871 t=1.6min
+[H2-barrido seed=0 lr=3e-05] epoca 11/12 perdida=0.7933 t=1.7min
+[H2-barrido seed=0 lr=3e-05] epoca 12/12 perdida=0.7799 t=1.9min
+[H2-barrido seed=0 lr=0.0001] epoca 1/12 perdida=1.2284 t=0.2min
+[H2-barrido seed=0 lr=0.0001] epoca 2/12 perdida=1.0645 t=0.4min
+[H2-barrido seed=0 lr=0.0001] epoca 3/12 perdida=0.9703 t=0.5min
+[H2-barrido seed=0 lr=0.0001] epoca 4/12 perdida=0.9224 t=0.7min
+[H2-barrido seed=0 lr=0.0001] epoca 5/12 perdida=0.9096 t=0.9min
+[H2-barrido seed=0 lr=0.0001] epoca 6/12 perdida=0.8894 t=1.0min
+[H2-barrido seed=0 lr=0.0001] epoca 7/12 perdida=0.8593 t=1.2min
+[H2-barrido seed=0 lr=0.0001] epoca 8/12 perdida=0.8556 t=1.4min
+[H2-barrido seed=0 lr=0.0001] epoca 9/12 perdida=0.8478 t=1.5min
+[H2-barrido seed=0 lr=0.0001] epoca 10/12 perdida=0.8654 t=1.7min
+[H2-barrido seed=0 lr=0.0001] epoca 11/12 perdida=0.8507 t=1.8min
+[H2-barrido seed=0 lr=0.0001] epoca 12/12 perdida=0.8039 t=2.0min
+[H2-barrido seed=0 lr=0.0003] epoca 1/12 perdida=1.2235 t=0.2min
+[H2-barrido seed=0 lr=0.0003] epoca 2/12 perdida=1.0652 t=0.3min
+[H2-barrido seed=0 lr=0.0003] epoca 3/12 perdida=0.9941 t=0.5min
+[H2-barrido seed=0 lr=0.0003] epoca 4/12 perdida=0.9594 t=0.6min
+[H2-barrido seed=0 lr=0.0003] epoca 5/12 perdida=0.9468 t=0.8min
+[H2-barrido seed=0 lr=0.0003] epoca 6/12 perdida=0.8631 t=0.9min
+[H2-barrido seed=0 lr=0.0003] epoca 7/12 perdida=0.8767 t=1.1min
+[H2-barrido seed=0 lr=0.0003] epoca 8/12 perdida=0.8873 t=1.2min
+[H2-barrido seed=0 lr=0.0003] epoca 9/12 perdida=0.8631 t=1.4min
+[H2-barrido seed=0 lr=0.0003] epoca 10/12 perdida=0.8900 t=1.6min
+[H2-barrido seed=0 lr=0.0003] epoca 11/12 perdida=0.8375 t=1.7min
+[H2-barrido seed=0 lr=0.0003] epoca 12/12 perdida=0.8141 t=1.9min
+[H2 seed=0 lr=3e-05] epoca 1/12 perdida=1.0859 t=0.2min
+[H2 seed=0 lr=3e-05] epoca 2/12 perdida=0.9822 t=0.4min
+[H2 seed=0 lr=3e-05] epoca 3/12 perdida=0.8934 t=0.6min
+[H2 seed=0 lr=3e-05] epoca 4/12 perdida=0.8736 t=0.8min
+[H2 seed=0 lr=3e-05] epoca 5/12 perdida=0.8721 t=1.0min
+[H2 seed=0 lr=3e-05] epoca 6/12 perdida=0.8621 t=1.2min
+[H2 seed=0 lr=3e-05] epoca 7/12 perdida=0.8352 t=1.4min
+[H2 seed=0 lr=3e-05] epoca 8/12 perdida=0.8226 t=1.6min
+[H2 seed=0 lr=3e-05] epoca 9/12 perdida=0.8037 t=1.9min
+[H2 seed=0 lr=3e-05] epoca 10/12 perdida=0.8080 t=2.1min
+[H2 seed=0 lr=3e-05] epoca 11/12 perdida=0.7849 t=2.3min
+[H2 seed=0 lr=3e-05] epoca 12/12 perdida=0.7783 t=2.5min
+[H2 seed=1 lr=3e-05] epoca 1/12 perdida=1.1018 t=0.2min
+[H2 seed=1 lr=3e-05] epoca 2/12 perdida=1.0083 t=0.4min
+[H2 seed=1 lr=3e-05] epoca 3/12 perdida=0.9250 t=0.6min
+[H2 seed=1 lr=3e-05] epoca 4/12 perdida=0.8693 t=0.8min
+[H2 seed=1 lr=3e-05] epoca 5/12 perdida=0.8574 t=1.0min
+[H2 seed=1 lr=3e-05] epoca 6/12 perdida=0.8302 t=1.2min
+[H2 seed=1 lr=3e-05] epoca 7/12 perdida=0.8224 t=1.4min
+[H2 seed=1 lr=3e-05] epoca 8/12 perdida=0.7911 t=1.6min
+[H2 seed=1 lr=3e-05] epoca 9/12 perdida=0.7950 t=1.8min
+[H2 seed=1 lr=3e-05] epoca 10/12 perdida=0.7862 t=2.0min
+[H2 seed=1 lr=3e-05] epoca 11/12 perdida=0.7720 t=2.2min
+[H2 seed=1 lr=3e-05] epoca 12/12 perdida=0.7564 t=2.4min
+[H2 seed=2 lr=3e-05] epoca 1/12 perdida=1.0825 t=0.2min
+[H2 seed=2 lr=3e-05] epoca 2/12 perdida=0.9235 t=0.4min
+[H2 seed=2 lr=3e-05] epoca 3/12 perdida=0.9140 t=0.6min
+[H2 seed=2 lr=3e-05] epoca 4/12 perdida=0.8468 t=0.9min
+[H2 seed=2 lr=3e-05] epoca 5/12 perdida=0.8495 t=1.1min
+[H2 seed=2 lr=3e-05] epoca 6/12 perdida=0.8201 t=1.3min
+[H2 seed=2 lr=3e-05] epoca 7/12 perdida=0.8203 t=1.5min
+[H2 seed=2 lr=3e-05] epoca 8/12 perdida=0.7997 t=1.7min
+[H2 seed=2 lr=3e-05] epoca 9/12 perdida=0.7923 t=1.9min
+[H2 seed=2 lr=3e-05] epoca 10/12 perdida=0.7802 t=2.1min
+[H2 seed=2 lr=3e-05] epoca 11/12 perdida=0.7699 t=2.3min
+[H2 seed=2 lr=3e-05] epoca 12/12 perdida=0.7509 t=2.5min
+[sonda seed=0] epoca 1/12 perdida=1.3842
+[sonda seed=0] epoca 2/12 perdida=1.2436
+[sonda seed=0] epoca 3/12 perdida=1.2164
+[sonda seed=0] epoca 4/12 perdida=1.2001
+[sonda seed=0] epoca 5/12 perdida=1.1864
+[sonda seed=0] epoca 6/12 perdida=1.1788
+[sonda seed=0] epoca 7/12 perdida=1.1638
+[sonda seed=0] epoca 8/12 perdida=1.1626
+[sonda seed=0] epoca 9/12 perdida=1.1425
+[sonda seed=0] epoca 10/12 perdida=1.1301
+[sonda seed=0] epoca 11/12 perdida=1.1208
+[sonda seed=0] epoca 12/12 perdida=1.1134
+[sonda seed=1] epoca 1/12 perdida=1.3786
+[sonda seed=1] epoca 2/12 perdida=1.2423
+[sonda seed=1] epoca 3/12 perdida=1.2143
+[sonda seed=1] epoca 4/12 perdida=1.2005
+[sonda seed=1] epoca 5/12 perdida=1.1868
+[sonda seed=1] epoca 6/12 perdida=1.1744
+[sonda seed=1] epoca 7/12 perdida=1.1619
+[sonda seed=1] epoca 8/12 perdida=1.1544
+[sonda seed=1] epoca 9/12 perdida=1.1363
+[sonda seed=1] epoca 10/12 perdida=1.1329
+[sonda seed=1] epoca 11/12 perdida=1.1189
+[sonda seed=1] epoca 12/12 perdida=1.1150
+[sonda seed=2] epoca 1/12 perdida=1.4244
+[sonda seed=2] epoca 2/12 perdida=1.2590
+[sonda seed=2] epoca 3/12 perdida=1.2183
+[sonda seed=2] epoca 4/12 perdida=1.2037
+[sonda seed=2] epoca 5/12 perdida=1.1899
+[sonda seed=2] epoca 6/12 perdida=1.1946
+[sonda seed=2] epoca 7/12 perdida=1.1685
+[sonda seed=2] epoca 8/12 perdida=1.1604
+[sonda seed=2] epoca 9/12 perdida=1.1465
+[sonda seed=2] epoca 10/12 perdida=1.1363
+[sonda seed=2] epoca 11/12 perdida=1.1266
+[sonda seed=2] epoca 12/12 perdida=1.1170

@@ -1,0 +1,366 @@
+{
+ "filas": [
+  {
+   "chip": "India_1050276",
+   "IoU_SAM_v2": 0.188496898869234,
+   "IoU_SAM_equipo": 0.18849366210103943,
+   "IoU_Otsu_abierto": 0.44833972233733943,
+   "IoU_Otsu_equipo": 0.44833972233733943,
+   "agua_SAM_pct": 97.56412014812783,
+   "coords_ok": true,
+   "tp": 47259,
+   "fp": 201710,
+   "fn": 1746,
+   "otsu_tp": 34619,
+   "otsu_fp": 28211,
+   "otsu_fn": 14386,
+   "raw_tp": 36626,
+   "raw_fp": 40429,
+   "raw_fn": 12379,
+   "scores": [
+    0.9653462171554565,
+    0.7948333024978638,
+    0.5253748297691345
+   ]
+  },
+  {
+   "chip": "Mekong_1149855",
+   "IoU_SAM_v2": 0.1295766729029944,
+   "IoU_SAM_equipo": 0.1295816974455916,
+   "IoU_Otsu_abierto": 0.49630115520571405,
+   "IoU_Otsu_equipo": 0.49630115520571405,
+   "agua_SAM_pct": 44.16238460682905,
+   "coords_ok": true,
+   "tp": 13367,
+   "fp": 85899,
+   "fn": 3893,
+   "otsu_tp": 13619,
+   "otsu_fp": 10181,
+   "otsu_fn": 3641,
+   "raw_tp": 14085,
+   "raw_fp": 23250,
+   "raw_fn": 3175,
+   "scores": [
+    0.9243147373199463,
+    0.7553264498710632,
+    0.7666873931884766
+   ]
+  },
+  {
+   "chip": "Nigeria_31096",
+   "IoU_SAM_v2": 0.0034540007251493234,
+   "IoU_SAM_equipo": 0.0035077297350815406,
+   "IoU_Otsu_abierto": 0.010337246831002386,
+   "IoU_Otsu_equipo": 0.010337246831002386,
+   "agua_SAM_pct": 96.33679254392217,
+   "coords_ok": true,
+   "tp": 724,
+   "fp": 208796,
+   "fn": 92,
+   "otsu_tp": 663,
+   "otsu_fp": 63321,
+   "otsu_fn": 153,
+   "raw_tp": 680,
+   "raw_fp": 91551,
+   "raw_fn": 136,
+   "scores": [
+    0.9274539351463318,
+    0.7118882536888123,
+    0.6910970211029053
+   ]
+  },
+  {
+   "chip": "Pakistan_43105",
+   "IoU_SAM_v2": 0.0003714184648036788,
+   "IoU_SAM_equipo": 0.00035918895134785654,
+   "IoU_Otsu_abierto": 0.0006036419732385392,
+   "IoU_Otsu_equipo": 0.0006036419732385392,
+   "agua_SAM_pct": 21.511416833858792,
+   "coords_ok": true,
+   "tp": 21,
+   "fp": 56269,
+   "fn": 250,
+   "otsu_tp": 36,
+   "otsu_fp": 59367,
+   "otsu_fn": 235,
+   "raw_tp": 60,
+   "raw_fp": 74638,
+   "raw_fn": 211,
+   "scores": [
+    0.9373615980148315,
+    0.9236114025115967,
+    0.8500620126724243
+   ]
+  },
+  {
+   "chip": "Paraguay_305760",
+   "IoU_SAM_v2": 0.16700447435848406,
+   "IoU_SAM_equipo": 0.16700447435848406,
+   "IoU_Otsu_abierto": 0.3723665961388554,
+   "IoU_Otsu_equipo": 0.3723665961388554,
+   "agua_SAM_pct": 99.70436096191406,
+   "coords_ok": true,
+   "tp": 43670,
+   "fp": 217699,
+   "fn": 121,
+   "otsu_tp": 36782,
+   "otsu_fp": 54988,
+   "otsu_fn": 7009,
+   "raw_tp": 37712,
+   "raw_fp": 69283,
+   "raw_fn": 6079,
+   "scores": [
+    0.9851778149604797,
+    0.9688935875892639,
+    0.9144920110702515
+   ]
+  },
+  {
+   "chip": "Somalia_12849",
+   "IoU_SAM_v2": 0.19811727662878217,
+   "IoU_SAM_equipo": 0.19806760681780217,
+   "IoU_Otsu_abierto": 0.1769526778538201,
+   "IoU_Otsu_equipo": 0.1769526778538201,
+   "agua_SAM_pct": 96.7214143082665,
+   "coords_ok": true,
+   "tp": 36746,
+   "fp": 148284,
+   "fn": 446,
+   "otsu_tp": 14531,
+   "otsu_fp": 44926,
+   "otsu_fn": 22661,
+   "raw_tp": 16982,
+   "raw_fp": 54250,
+   "raw_fn": 20210,
+   "scores": [
+    0.9874166250228882,
+    0.9239643812179565,
+    0.5860134959220886
+   ]
+  },
+  {
+   "chip": "Spain_1199913",
+   "IoU_SAM_v2": 0.035798236640088715,
+   "IoU_SAM_equipo": 0.035798236640088715,
+   "IoU_Otsu_abierto": 0.15265143110716664,
+   "IoU_Otsu_equipo": 0.15265143110716664,
+   "agua_SAM_pct": 97.34381616140809,
+   "coords_ok": true,
+   "tp": 9168,
+   "fp": 246012,
+   "fn": 922,
+   "otsu_tp": 8256,
+   "otsu_fp": 43994,
+   "otsu_fn": 1834,
+   "raw_tp": 8474,
+   "raw_fp": 61413,
+   "raw_fn": 1616,
+   "scores": [
+    0.9862514734268188,
+    0.9063941240310669,
+    0.5828607082366943
+   ]
+  },
+  {
+   "chip": "Sri-Lanka_85652",
+   "IoU_SAM_v2": 0.008870381622999845,
+   "IoU_SAM_equipo": 0.010065843066242587,
+   "IoU_Otsu_abierto": 0.017556027569465515,
+   "IoU_Otsu_equipo": 0.017556027569465515,
+   "agua_SAM_pct": 84.82124761866159,
+   "coords_ok": true,
+   "tp": 1489,
+   "fp": 165921,
+   "fn": 452,
+   "otsu_tp": 1215,
+   "otsu_fp": 67266,
+   "otsu_fn": 726,
+   "raw_tp": 1327,
+   "raw_fp": 83853,
+   "raw_fn": 614,
+   "scores": [
+    0.9387383460998535,
+    0.9021406769752502,
+    0.7005490064620972
+   ]
+  },
+  {
+   "chip": "USA_826217",
+   "IoU_SAM_v2": 0.004582274743010758,
+   "IoU_SAM_equipo": 0.004582274743010758,
+   "IoU_Otsu_abierto": 0.05605378169230563,
+   "IoU_Otsu_equipo": 0.05605378169230563,
+   "agua_SAM_pct": 73.55661017983718,
+   "coords_ok": true,
+   "tp": 900,
+   "fp": 191911,
+   "fn": 3598,
+   "otsu_tp": 4194,
+   "otsu_fp": 70323,
+   "otsu_fn": 304,
+   "raw_tp": 4245,
+   "raw_fp": 91032,
+   "raw_fn": 253,
+   "scores": [
+    0.9620704650878906,
+    0.7832981944084167,
+    0.5403749942779541
+   ]
+  }
+ ],
+ "agregado": {
+  "sam_v2": {
+   "n_chips": 9,
+   "global_iou": 0.09087778874161785,
+   "mean_chip_iou": 0.08180795943950521,
+   "median_chip_iou": 0.035798236640088715,
+   "precision": 0.09150249575587241,
+   "recall": 0.9301242236024845,
+   "f1": 0.16661406012574503,
+   "iou_undefined": 0,
+   "tp": 153344,
+   "fp": 1522501,
+   "fn": 11520
+  },
+  "otsu_abierto": {
+   "n_chips": 9,
+   "global_iou": 0.1875326163364014,
+   "mean_chip_iou": 0.19235136452321197,
+   "median_chip_iou": 0.15265143110716664,
+   "precision": 0.20470195438568747,
+   "recall": 0.6909634607919255,
+   "f1": 0.3158357315943861,
+   "iou_undefined": 0,
+   "tp": 113915,
+   "fp": 442577,
+   "fn": 50949
+  },
+  "otsu_crudo": {
+   "n_chips": 9,
+   "global_iou": 0.1592855732390801,
+   "mean_chip_iou": 0.16255904831766677,
+   "median_chip_iou": 0.11851250996461687,
+   "precision": 0.1693093296144473,
+   "recall": 0.7290312014751553,
+   "f1": 0.2747995436431271,
+   "iou_undefined": 0,
+   "tp": 120191,
+   "fp": 589699,
+   "fn": 44673
+  }
+ },
+ "max_dif_abs_iou_sam": 0.001195461443242743,
+ "max_dif_abs_iou_otsu": 0.0,
+ "empates": [
+  {
+   "chip": "India_1050276",
+   "prompts_iguales": false,
+   "IoU_v2_literal": 0.188496898869234,
+   "IoU_v2.1_estable": 0.18819802689706558,
+   "tp_e": 46222,
+   "fp_e": 196598,
+   "fn_e": 2783
+  },
+  {
+   "chip": "Mekong_1149855",
+   "prompts_iguales": false,
+   "IoU_v2_literal": 0.1295766729029944,
+   "IoU_v2.1_estable": 0.12890972356466268,
+   "tp_e": 13337,
+   "fp_e": 86200,
+   "fn_e": 3923
+  },
+  {
+   "chip": "Nigeria_31096",
+   "prompts_iguales": false,
+   "IoU_v2_literal": 0.0034540007251493234,
+   "IoU_v2.1_estable": 0.003494698759808123,
+   "tp_e": 738,
+   "fp_e": 210361,
+   "fn_e": 78
+  },
+  {
+   "chip": "Pakistan_43105",
+   "prompts_iguales": false,
+   "IoU_v2_literal": 0.0003714184648036788,
+   "IoU_v2.1_estable": 0.0003541578127213486,
+   "tp_e": 20,
+   "fp_e": 56201,
+   "fn_e": 251
+  },
+  {
+   "chip": "Paraguay_305760",
+   "prompts_iguales": true,
+   "IoU_v2_literal": 0.16700447435848406,
+   "IoU_v2.1_estable": 0.16700447435848406,
+   "tp_e": 43670,
+   "fp_e": 217699,
+   "fn_e": 121
+  },
+  {
+   "chip": "Somalia_12849",
+   "prompts_iguales": false,
+   "IoU_v2_literal": 0.19811727662878217,
+   "IoU_v2.1_estable": 0.19806760681780217,
+   "tp_e": 36756,
+   "fp_e": 148381,
+   "fn_e": 436
+  },
+  {
+   "chip": "Spain_1199913",
+   "prompts_iguales": true,
+   "IoU_v2_literal": 0.035798236640088715,
+   "IoU_v2.1_estable": 0.035798236640088715,
+   "tp_e": 9168,
+   "fp_e": 246012,
+   "fn_e": 922
+  },
+  {
+   "chip": "Sri-Lanka_85652",
+   "prompts_iguales": false,
+   "IoU_v2_literal": 0.008870381622999845,
+   "IoU_v2.1_estable": 0.010034292453074165,
+   "tp_e": 1940,
+   "fp_e": 191396,
+   "fn_e": 1
+  },
+  {
+   "chip": "USA_826217",
+   "prompts_iguales": true,
+   "IoU_v2_literal": 0.004582274743010758,
+   "IoU_v2.1_estable": 0.004582274743010758,
+   "tp_e": 900,
+   "fp_e": 191911,
+   "fn_e": 3598
+  }
+ ],
+ "agregado_v21_estable": {
+  "n_chips": 9,
+  "global_iou": 0.08934776848463082,
+  "mean_chip_iou": 0.08182705467185751,
+  "median_chip_iou": 0.035798236640088715,
+  "precision": 0.0899853314560739,
+  "recall": 0.9265273194875776,
+  "f1": 0.1640390168677183,
+  "iou_undefined": 0,
+  "tp": 152751,
+  "fp": 1544759,
+  "fn": 12113
+ },
+ "pico_memoria_gib": 2.5247840881347656,
+ "entorno": {
+  "python": "3.14.7",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+  "ram_gb": 31.9,
+  "torch": "2.14.1+cpu",
+  "transformers": "5.19.0",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "skimage": "0.26.0",
+  "device": "cpu",
+  "torch_threads": 2,
+  "model_id": "facebook/sam-vit-base",
+  "model_revision": "70c1a07f894ebb5b307fd9eaaee97b9dfc16068f"
+ }
+}

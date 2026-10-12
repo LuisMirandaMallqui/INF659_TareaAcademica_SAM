@@ -1,54 +1,38 @@
-Estado consolidado del trabajo: INF659 Tarea Academica Final
+# Estado consolidado del trabajo (actualizado al 12 de octubre de 2026)
 
-SAM aplicado a mapeo de inundaciones con Sentinel-1 SAR, benchmark Sen1Floods11, con proyeccion al Niño Costero de 2017 en Piura. Ultima actualizacion: domingo 11 de octubre de 2026, noche.
+SAM (ViT-B) aplicado a la segmentación de agua en Sentinel-1 SAR, con el benchmark Sen1Floods11 y proyección al Niño Costero de 2017 en Piura. Equipo: John Manuel Arzapalo Arana, Luis Alberto Miranda Mallqui y Juan Diego Zavala Viscardo. Curso INF659, Técnicas Avanzadas de Data Mining y Sistemas Inteligentes, PUCP 2026-2.
 
-Entregables
+Este documento reemplaza al estado del 11 de octubre, que ahora está en `docs/historial/`.
 
-| Entregable | Fecha | Puntos | Estado | Que falta |
-|---|---|---|---|---|
-| E1: propuesta, diseccion, intervencion preliminar, cuaderno de decisiones | lunes 12 de octubre | 4 | Documento integrado (`e1_documento_integrado.md`), citas verificadas y notebooks reproducibles ya en el repositorio | Solo falta lo que ningun modelo de IA puede completar: los nombres reales de los tres integrantes (portada y cuaderno de decisiones) y la validacion personal de cada uno en la tabla de la seccion 8, requerida para la defensa oral individual |
-| E2: poster e inscripcion WAIMLAP | 16 de octubre | 2 | Borrador corto listo | Inscripcion formal, confirmar requisitos del formulario |
-| E3: entrega completa | 16 de noviembre | 2 | No iniciado | Ejecutar H2, fine-tuning del decoder; evaluacion en Piura real; ampliar a mas de los 89 chips de validacion; ablaciones adicionales de la Parte 6 del borrador |
-| Defensa oral individual | 18 al 20 de noviembre | 6 | No iniciado | Cada integrante debe poder explicar personalmente el pipeline, los resultados y la correccion v2 |
-| Articulo final IEEE o LNCS, 4 a 8 paginas | 30 de noviembre | 6 | No iniciado | Depende de E3 |
+## Las tres fases
 
-Las tres fases
-
-| Fase | Que pide | Estado | Evidencia |
-|---|---|---|---|
-| Fase A, diseccion instrumentada | Parametros, FLOPs, campo receptivo, latencia, memoria | Completa, real, corregida | 93.7 millones de parametros totales, codificador de imagen 95.66 por ciento del total, decodificador 4.33 por ciento, razon 22 a 1; aproximadamente 930 GFLOPs por pasada, corregido tras verificar que SAM usa atencion ventaneada en 8 de 12 capas y global solo en las capas 2, 5, 8 y 11; campo receptivo local de 16 por 16 en la capa de parches, limitado a la ventana de 224 por 224 pixeles en las capas ventaneadas, y global por primera vez en la capa 2; latencia real 12.4 segundos y memoria real 2.5 gigabytes, ambas en CPU de este contenedor, no en la RTX 3060 |
-| Fase B, intervencion con hipotesis previa | Control de entrada ya hecho; intervencion de nucleo, H2, pendiente | Parcial | Umbral de Otsu automatico y generacion automatica de prompts, reales, corregidos en v2 para no depender de la etiqueta; el ajuste del decoder en si, H2, todavia no se corrio |
-| Fase C, estres y honestidad | Evaluacion fuera de dominio y diagnostico honesto de fallas | En curso | SAM pierde contra el umbral en ocho de nueve chips reales y colapsa a entre 97 y 99.7 por ciento de la imagen marcada como agua en seis de nueve; falta la evaluacion real sobre la escena de Piura |
-
-Las tres hipotesis
-
-| Hipotesis | Estado | Evidencia real |
+| Fase | Estado | Evidencia (notebook) |
 |---|---|---|
-| H1, SAM con prompts automaticos mejora el umbral | Evidencia real en contra, confirmada tras la correccion v2 | IoU global de SAM 0.0897 frente a IoU global del umbral 0.1875, sobre nueve chips reales de Sen1Floods11 |
-| H2, afinar solo el decoder mejora el resultado | No probado | El reparto de parametros de Fase A, decoder veintidos veces mas chico que el codificador, respalda que es una intervencion barata de intentar; el entrenamiento en si no se ha corrido |
-| H3, SAM sirve para seleccionar candidatos | No probado | Sin evidencia todavia |
+| A. Disección instrumentada | **Completa** | 01: parámetros por bloque (93.7 M; decodificador 4.06 M), **FLOPs medidos** (972 GFLOPs en el codificador frente a 930 de la fórmula; la diferencia es el relleno de las ventanas), PCA de características intermedias, **campo receptivo efectivo** (gradiente nulo fuera de la ventana antes del bloque 2) y latencia/memoria del pipeline SAR (4.4 s/chip en CPU y 0.60 s/chip en una RTX 3070; 2.5 GiB de RAM) |
+| B. Intervención en el núcleo | **Completa (preliminar para E1)** | 03: ablaciones A1 a A4. 04: **H2**, ajuste exclusivo del decodificador con 3 semillas y control H2-c |
+| C. Estrés y honestidad | **Completa en `valid`** | 03: oráculos D1 y D2 y calibración D3. 04: análisis de fallas. 05 y 06: análisis exploratorios de la sonda lineal y la curva de validación |
 
-Quien hizo que hasta ahora, resumen de alto nivel
+## Hipótesis
 
-| Quien | Que hizo |
+| Hipótesis | Resultado (86 chips de `valid`) |
 |---|---|
-| Claude, esta sesion | Pipeline real de principio a fin sobre datos reales de Sen1Floods11: umbral de Otsu real, prompts automaticos reales, SAM oficial real, IoU real; correccion v2 tras la revision recibida; diseccion real de Fase A; manifiesto de reproducibilidad con URLs y sha256 de los 20 archivos usados |
-| ChatGPT | Redaccion academica de las ocho partes del borrador de E1, ya actualizadas con la correccion v2; revision critica del pipeline y de la diseccion de Fase A de Claude, encontro dos fallas reales: la fuga de etiqueta en los prompts negativos, corregida en v2, y el supuesto de atencion global en las doce capas del codificador, corregido junto con el campo receptivo tras verificar contra la configuracion real de SAM |
-| El equipo | Propuesta original de usar SAM sobre Sentinel-1 para Piura; decision de direccion del proyecto; ensamblar el documento final; completar el cuaderno de decisiones con nombres y validaciones reales; la defensa oral |
+| H1: SAM con prompts automáticos mejora a Otsu | **Rechazada.** IoU 0.115 frente a 0.256 (Δ −0.141, IC 95 % [−0.181, −0.103]); igual a "todo es agua" |
+| H2: ajustar solo el decodificador mejora a SAM preentrenado | **Confirmada.** IoU **0.431 ± 0.038** (3 semillas), también por encima de Otsu en las 3 semillas |
+| H2-c: una sonda lineal 1×1 rinde cerca de H2 | **No se cumplió** (0.073). Según el análisis exploratorio, por calibración del umbral y subajuste |
+| H3: SAM como filtro de regiones candidatas | Pendiente (E3) |
 
-Archivos que existen ahora mismo
+## Hallazgos que conviene recordar
 
-De Claude, generados hoy: Intervencion_preliminar_real.md y su correccion correccion_v2_fuga_de_etiqueta.md, los scripts run_sam_pipeline.py y run_sam_pipeline_v2.py, los resultados resultados_reales.json y resultados_reales_v2.json, las figuras comparacion_real.png y comparacion_real_v2.png, el manifiesto manifiesto_reproducibilidad.md, los veinte archivos reales de chips comprimidos en chips_sen1floods11_reales.zip, la diseccion fase_a_diseccion_real.md con su json, y este mismo documento.
+* El fallo de SAM **no viene de los prompts**: con prompts perfectos tampoco supera a Otsu. Viene de la cabeza de IoU, descalibrada en SAR (ρ = −0.05), que elige la máscara más grande en 80 de 86 chips.
+* La información de agua **sí está** en el codificador (AUC 0.934 en bloques intermedios), aunque aporta poco sobre la retrodispersión cruda (0.906).
+* El muestreador de prompts de v2 dependía de la CPU por empates en `np.argsort`. Se corrigió con un ordenamiento estable (**v2.1**).
+* El entrenamiento de H2 generaliza hasta la época 12, muestra sobreajuste tardío, es inestable y no es determinista en GPU.
 
-De ChatGPT, en la maquina del usuario: e1_borrador_chatgpt.md con las ocho partes, y revision_del_material_claude.md con la revision que motivo la correccion v2.
+## Próximos pasos (E3, 16 de noviembre)
 
-Proximos pasos, en orden de prioridad
-
-| Prioridad | Accion | Responsable |
-|---|---|---|
-| 1 | Ensamblar el documento final de E1 con todo lo anterior | El equipo, hoy |
-| 2 | Verificar las cinco citas candidatas marcadas VERIFICAR en la Parte 2 del borrador | Claude puede hacerlo ahora con busqueda real si se lo piden |
-| 3 | Completar el cuaderno de decisiones, Parte 5, con nombres reales de cada integrante | El equipo, no se puede delegar |
-| 4 | Entregar E1 | El equipo, antes del lunes 12 de octubre |
-| 5 | Evaluar H2, afinar el decoder, usando la particion de entrenamiento | Pendiente para E3, buen candidato para usar computo en la nube con GPU si esta disponible |
-| 6 | Ampliar la evaluacion mas alla de nueve chips, y evaluar en la escena real de Piura si se resuelve el acceso y la licencia de los datos | Pendiente para E3 |
+1. Evaluar en `test` y `bolivia`, hasta ahora reservadas.
+2. Agregar una línea base U-Net entrenada con los mismos 250 chips.
+3. Estabilizar H2 con decaimiento de la tasa de aprendizaje o EMA, selección de la época en `train-dev` y modo determinista, todo pre-registrado.
+4. Adaptar parte del codificador con LoRA o adaptadores, usando VV y VH.
+5. Evaluar Piura 2017 con las escenas de Shen et al. (2022) y MFF-Net (sección 3.6).
+6. Completar las validaciones personales del cuaderno de decisiones y firmar el protocolo pre-registrado.

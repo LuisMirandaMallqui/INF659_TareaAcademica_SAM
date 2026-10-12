@@ -1,4 +1,13 @@
 __pycache__/
 *.pyc
-scripts/chips/
 .ipynb_checkpoints/
+*.part
+
+# pipeline v2 original (scripts/)
+scripts/chips/
+
+# datos descargados, pesos y caches (los regeneran los notebooks)
+data/*
+!data/chips_sen1floods11_reales.zip
+models/
+cache/
