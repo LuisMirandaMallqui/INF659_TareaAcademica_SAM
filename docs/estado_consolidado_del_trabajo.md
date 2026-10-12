@@ -6,7 +6,7 @@ Entregables
 
 | Entregable | Fecha | Puntos | Estado | Que falta |
 |---|---|---|---|---|
-| E1: propuesta, diseccion, intervencion preliminar, cuaderno de decisiones | lunes 12 de octubre | 4 | Documento integrado (`E1_Documento_integrado.md`), citas verificadas y notebooks reproducibles ya en el repositorio | Solo falta lo que ningun modelo de IA puede completar: los nombres reales de los tres integrantes (portada y cuaderno de decisiones) y la validacion personal de cada uno en la tabla de la seccion 8, requerida para la defensa oral individual |
+| E1: propuesta, diseccion, intervencion preliminar, cuaderno de decisiones | lunes 12 de octubre | 4 | Documento integrado (`e1_documento_integrado.md`), citas verificadas y notebooks reproducibles ya en el repositorio | Solo falta lo que ningun modelo de IA puede completar: los nombres reales de los tres integrantes (portada y cuaderno de decisiones) y la validacion personal de cada uno en la tabla de la seccion 8, requerida para la defensa oral individual |
 | E2: poster e inscripcion WAIMLAP | 16 de octubre | 2 | Borrador corto listo | Inscripcion formal, confirmar requisitos del formulario |
 | E3: entrega completa | 16 de noviembre | 2 | No iniciado | Ejecutar H2, fine-tuning del decoder; evaluacion en Piura real; ampliar a mas de los 89 chips de validacion; ablaciones adicionales de la Parte 6 del borrador |
 | Defensa oral individual | 18 al 20 de noviembre | 6 | No iniciado | Cada integrante debe poder explicar personalmente el pipeline, los resultados y la correccion v2 |
@@ -38,9 +38,9 @@ Quien hizo que hasta ahora, resumen de alto nivel
 
 Archivos que existen ahora mismo
 
-De Claude, generados hoy: Intervencion_preliminar_real.md y su correccion Correccion_v2_fuga_de_etiqueta.md, los scripts run_sam_pipeline.py y run_sam_pipeline_v2.py, los resultados resultados_reales.json y resultados_reales_v2.json, las figuras comparacion_real.png y comparacion_real_v2.png, el manifiesto MANIFIESTO_reproducibilidad.md, los veinte archivos reales de chips comprimidos en chips_sen1floods11_reales.zip, la diseccion Fase_A_diseccion_real.md con su json, y este mismo documento.
+De Claude, generados hoy: Intervencion_preliminar_real.md y su correccion correccion_v2_fuga_de_etiqueta.md, los scripts run_sam_pipeline.py y run_sam_pipeline_v2.py, los resultados resultados_reales.json y resultados_reales_v2.json, las figuras comparacion_real.png y comparacion_real_v2.png, el manifiesto manifiesto_reproducibilidad.md, los veinte archivos reales de chips comprimidos en chips_sen1floods11_reales.zip, la diseccion fase_a_diseccion_real.md con su json, y este mismo documento.
 
-De ChatGPT, en la maquina del usuario: E1_Borrador_ChatGPT.md con las ocho partes, y Revision_del_material_Claude.md con la revision que motivo la correccion v2.
+De ChatGPT, en la maquina del usuario: e1_borrador_chatgpt.md con las ocho partes, y revision_del_material_claude.md con la revision que motivo la correccion v2.
 
 Proximos pasos, en orden de prioridad
 

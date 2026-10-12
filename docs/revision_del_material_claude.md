@@ -28,8 +28,8 @@ La estimación de 1 319.09 GFLOPs supone atención global en doce capas, lo cual
 
 Se inspeccionó el ZIP y se comprobaron los SHA-256 de sus veinte GeoTIFF contra el manifiesto: todos coinciden. Esto verifica integridad respecto al manifiesto recibido, no una descarga independiente desde el origen. Hay URLs y regla de selección. El JSON no guarda coordenadas exactas de prompts ni máscaras producidas, pese al comentario del script que indica guardar prompts. Tampoco se fija una revisión inmutable de pesos ni se serializa toda la configuración de normalización y apertura.
 
-Estado_consolidado_del_trabajo.md aún enumera archivos v1 eliminados y presenta Fase A como completa con la aproximación errónea de FLOPs y campo receptivo. El borrador actualizado evita trasladar esas afirmaciones. No existe entre los archivos revisados un registro que cierre las cinco citas candidatas; se mantienen [VERIFICAR], como también indica la tabla de estado.
+estado_consolidado_del_trabajo.md aún enumera archivos v1 eliminados y presenta Fase A como completa con la aproximación errónea de FLOPs y campo receptivo. El borrador actualizado evita trasladar esas afirmaciones. No existe entre los archivos revisados un registro que cierre las cinco citas candidatas; se mantienen [VERIFICAR], como también indica la tabla de estado.
 
 ## Redacción actualizada
 
-E1_Borrador_ChatGPT.md conserva las ocho partes e incorpora v2, Otsu sin apertura, el alcance correcto del perfilado y los pendientes analíticos de Fase A. Se actualizaron resumen, metodología, cronograma, cuaderno, límites y póster. Los nombres y validaciones personales siguen pendientes. H2, H3 y Piura no tienen resultados. La propuesta de créditos y GitHub no forma parte de esta tarea de redacción.
+e1_borrador_chatgpt.md conserva las ocho partes e incorpora v2, Otsu sin apertura, el alcance correcto del perfilado y los pendientes analíticos de Fase A. Se actualizaron resumen, metodología, cronograma, cuaderno, límites y póster. Los nombres y validaciones personales siguen pendientes. H2, H3 y Piura no tienen resultados. La propuesta de créditos y GitHub no forma parte de esta tarea de redacción.

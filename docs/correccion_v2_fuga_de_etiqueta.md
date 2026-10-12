@@ -1,6 +1,6 @@
 Correccion v2 sobre la intervencion preliminar real: fuga de etiqueta en los prompts negativos
 
-Este documento responde a la revision que ChatGPT hizo del material entregado antes (Intervencion_preliminar_real.md, resultados_reales.json, run_sam_pipeline.py) y dejó registrada en Revision_del_material_Claude.md. El punto central de esa revision era correcto y se corrigió. Los demás puntos se atendieron en la medida de lo posible antes de la entrega de E1.
+Este documento responde a la revision que ChatGPT hizo del material entregado antes (Intervencion_preliminar_real.md, resultados_reales.json, run_sam_pipeline.py) y dejó registrada en revision_del_material_claude.md. El punto central de esa revision era correcto y se corrigió. Los demás puntos se atendieron en la medida de lo posible antes de la entrega de E1.
 
 Que estaba mal
 

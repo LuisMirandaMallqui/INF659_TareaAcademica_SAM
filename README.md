@@ -13,16 +13,16 @@ scripts/
   fase_a_diseccion.py       diseccion instrumentada de SAM: parametros, FLOPs, campo receptivo, latencia, memoria
   fase_a_diseccion.ipynb    misma diseccion como notebook, mismo orden de celdas que el .py
 docs/
-  Estado_consolidado_del_trabajo.md       tabla resumen de todo el avance (entregables, fases, hipotesis, proximos pasos)
-  E1_Documento_integrado.md               documento integrado de la entrega E1 (las 8 secciones + anexos)
-  E2_Texto_inscripcion_WAIMLAP.md         texto para la inscripcion del poster WAIMLAP (entrega E2)
-  Resumen_decisiones_equipo.md            resumen corto de decisiones y avances para el equipo
-  Verificacion_citas_Parte2.md            verificacion contra la fuente real de las 5 citas de la Parte 2 (estado del arte)
-  E1_Borrador_ChatGPT.md                  borrador academico original de E1, las ocho partes
-  Revision_del_material_Claude.md         revision critica que encontro las dos fallas reales corregidas abajo
-  Correccion_v2_fuga_de_etiqueta.md       correccion 1: fuga de etiqueta en los prompts negativos (pipeline)
-  Fase_A_diseccion_real.md                correccion 2: atencion ventaneada vs global mal asumida (diseccion del modelo)
-  MANIFIESTO_reproducibilidad.md          URLs exactas + sha256 de cada archivo de datos usado
+  estado_consolidado_del_trabajo.md       tabla resumen de todo el avance (entregables, fases, hipotesis, proximos pasos)
+  e1_documento_integrado.md               documento integrado de la entrega E1 (las 8 secciones + anexos)
+  e2_texto_inscripcion_waimlap.md         texto para la inscripcion del poster WAIMLAP (entrega E2)
+  resumen_decisiones_equipo.md            resumen corto de decisiones y avances para el equipo
+  verificacion_citas_parte2.md            verificacion contra la fuente real de las 5 citas de la Parte 2 (estado del arte)
+  e1_borrador_chatgpt.md                  borrador academico original de E1, las ocho partes
+  revision_del_material_claude.md         revision critica que encontro las dos fallas reales corregidas abajo
+  correccion_v2_fuga_de_etiqueta.md       correccion 1: fuga de etiqueta en los prompts negativos (pipeline)
+  fase_a_diseccion_real.md                correccion 2: atencion ventaneada vs global mal asumida (diseccion del modelo)
+  manifiesto_reproducibilidad.md          URLs exactas + sha256 de cada archivo de datos usado
 results/
   resultados_reales_v2.json      resultados completos por chip (TP/FP/FN, IoU, scores de SAM)
   fase_a_diseccion_real.json     parametros/FLOPs/latencia/memoria reales del modelo
@@ -45,17 +45,17 @@ El requisito de "notebooks reproducibles" del curso se cubre con `run_sam_pipeli
 
 ## Hallazgo principal (ya reportado en E1)
 
-SAM con prompts automaticos pierde contra el umbral de Otsu en 8 de 9 chips reales (IoU global 0.0897 vs 0.1875), y colapsa a marcar entre 97% y 99.7% de la imagen como agua en 6 de 9 chips: un caso de "mask collapse" fuera de dominio, no una falla de implementacion (las coordenadas de los prompts se verificaron por codigo). El detalle completo, incluida la correccion por fuga de etiqueta, esta en `docs/Correccion_v2_fuga_de_etiqueta.md`.
+SAM con prompts automaticos pierde contra el umbral de Otsu en 8 de 9 chips reales (IoU global 0.0897 vs 0.1875), y colapsa a marcar entre 97% y 99.7% de la imagen como agua en 6 de 9 chips: un caso de "mask collapse" fuera de dominio, no una falla de implementacion (las coordenadas de los prompts se verificaron por codigo). El detalle completo, incluida la correccion por fuga de etiqueta, esta en `docs/correccion_v2_fuga_de_etiqueta.md`.
 
 ## Que falta y como seguirlo en una sesion cloud con GPU
 
 Todo esto esta pendiente porque corre lento o no corre en CPU (el forward pass de SAM aqui tarda ~12 segundos; con GPU deberia ser del orden de 100-200ms, como referencia el equipo ya tenia 135.5ms en una RTX 3060).
 
-1. **H2 (Fase B, intervencion de nucleo)**: afinar solo el decodificador de mascaras (4.06M parametros, 22x mas chico que el codificador segun `results/fase_a_diseccion_real.json`) dejando el codificador de imagen congelado, sobre la particion de entrenamiento de Sen1Floods11. El bucket publico es el mismo que ya se usa en `MANIFIESTO_reproducibilidad.md` (`https://storage.googleapis.com/sen1floods11/v1.1/...`); el CSV de entrenamiento deberia estar en `v1.1/splits/flood_handlabeled/flood_train_data.csv` siguiendo el mismo patron que el de validacion ya confirmado, pero **verificar el nombre exacto listando el bucket antes de asumirlo** (`gsutil ls gs://sen1floods11/v1.1/splits/flood_handlabeled/` o el equivalente HTTP), no se confirmo en esta sesion.
+1. **H2 (Fase B, intervencion de nucleo)**: afinar solo el decodificador de mascaras (4.06M parametros, 22x mas chico que el codificador segun `results/fase_a_diseccion_real.json`) dejando el codificador de imagen congelado, sobre la particion de entrenamiento de Sen1Floods11. El bucket publico es el mismo que ya se usa en `manifiesto_reproducibilidad.md` (`https://storage.googleapis.com/sen1floods11/v1.1/...`); el CSV de entrenamiento deberia estar en `v1.1/splits/flood_handlabeled/flood_train_data.csv` siguiendo el mismo patron que el de validacion ya confirmado, pero **verificar el nombre exacto listando el bucket antes de asumirlo** (`gsutil ls gs://sen1floods11/v1.1/splits/flood_handlabeled/` o el equivalente HTTP), no se confirmo en esta sesion.
 2. **Ampliar de 9 a los 89 chips de validacion completos**: mismo patron de URL, iterar sobre las 89 filas del CSV ya referenciado en el manifiesto en vez de solo la primera fila por region.
 3. **Evaluacion real en Piura**: requiere conseguir una escena Sentinel-1 real de la zona y fecha del Niño Costero 2017 con alguna mascara de referencia (o generar una por fotointerpretacion), eso todavia no esta resuelto.
 
-Las 5 citas marcadas `[VERIFICAR]` en `docs/E1_Borrador_ChatGPT.md` (Parte 2) no son parte de este trabajo de computo; se verifican con busqueda bibliografica normal.
+Las 5 citas marcadas `[VERIFICAR]` en `docs/e1_borrador_chatgpt.md` (Parte 2) no son parte de este trabajo de computo; se verifican con busqueda bibliografica normal.
 
 ## Integraciones necesarias
 
