@@ -8,11 +8,17 @@ Punto de partida para seguir el trabajo desde una sesion cloud de Claude Code (c
 
 ```
 scripts/
-  run_sam_pipeline_v2.py   pipeline completo: Otsu -> prompts automaticos -> SAM -> IoU real
-  fase_a_diseccion.py      diseccion instrumentada de SAM: parametros, FLOPs, campo receptivo, latencia, memoria
+  run_sam_pipeline_v2.py    pipeline completo: Otsu -> prompts automaticos -> SAM -> IoU real
+  run_sam_pipeline_v2.ipynb mismo pipeline como notebook (celdas = funciones del .py, sin reescribir ninguna linea)
+  fase_a_diseccion.py       diseccion instrumentada de SAM: parametros, FLOPs, campo receptivo, latencia, memoria
+  fase_a_diseccion.ipynb    misma diseccion como notebook, mismo orden de celdas que el .py
 docs/
   Estado_consolidado_del_trabajo.md       tabla resumen de todo el avance (entregables, fases, hipotesis, proximos pasos)
-  E1_Borrador_ChatGPT.md                  borrador academico de E1, las ocho partes
+  E1_Documento_integrado.md               documento integrado de la entrega E1 (las 8 secciones + anexos)
+  E2_Texto_inscripcion_WAIMLAP.md         texto para la inscripcion del poster WAIMLAP (entrega E2)
+  Resumen_decisiones_equipo.md            resumen corto de decisiones y avances para el equipo
+  Verificacion_citas_Parte2.md            verificacion contra la fuente real de las 5 citas de la Parte 2 (estado del arte)
+  E1_Borrador_ChatGPT.md                  borrador academico original de E1, las ocho partes
   Revision_del_material_Claude.md         revision critica que encontro las dos fallas reales corregidas abajo
   Correccion_v2_fuga_de_etiqueta.md       correccion 1: fuga de etiqueta en los prompts negativos (pipeline)
   Fase_A_diseccion_real.md                correccion 2: atencion ventaneada vs global mal asumida (diseccion del modelo)
@@ -34,6 +40,8 @@ unzip ../data/chips_sen1floods11_reales.zip -d .   # crea scripts/chips/
 python run_sam_pipeline_v2.py
 python fase_a_diseccion.py
 ```
+
+El requisito de "notebooks reproducibles" del curso se cubre con `run_sam_pipeline_v2.ipynb` y `fase_a_diseccion.ipynb`: cada funcion del `.py` correspondiente es su propia celda, sin reescribir ni reindentar ninguna linea, y la ultima celda llama `main()` (o, en el caso de `fase_a_diseccion`, que no tiene `main()`, las celdas siguen el mismo orden de arriba a abajo que el script). Ejecutar todas las celdas en orden en Jupyter es equivalente a correr el `.py` desde la terminal.
 
 ## Hallazgo principal (ya reportado en E1)
 

@@ -1,12 +1,12 @@
 Estado consolidado del trabajo: INF659 Tarea Academica Final
 
-SAM aplicado a mapeo de inundaciones con Sentinel-1 SAR, benchmark Sen1Floods11, con proyeccion al Niño Costero de 2017 en Piura. Ultima actualizacion: domingo 11 de octubre de 2026, tarde.
+SAM aplicado a mapeo de inundaciones con Sentinel-1 SAR, benchmark Sen1Floods11, con proyeccion al Niño Costero de 2017 en Piura. Ultima actualizacion: domingo 11 de octubre de 2026, noche.
 
 Entregables
 
 | Entregable | Fecha | Puntos | Estado | Que falta |
 |---|---|---|---|---|
-| E1: propuesta, diseccion, intervencion preliminar, cuaderno de decisiones | lunes 12 de octubre | 4 | Material completo, falta ensamblar | Juntar el borrador de ChatGPT, la diseccion real de Fase A, la intervencion preliminar real v2 y el manifiesto en un solo documento; revisar las cinco citas marcadas VERIFICAR; completar el cuaderno de decisiones con los nombres reales de cada integrante |
+| E1: propuesta, diseccion, intervencion preliminar, cuaderno de decisiones | lunes 12 de octubre | 4 | Documento integrado (`E1_Documento_integrado.md`), citas verificadas y notebooks reproducibles ya en el repositorio | Solo falta lo que ningun modelo de IA puede completar: los nombres reales de los tres integrantes (portada y cuaderno de decisiones) y la validacion personal de cada uno en la tabla de la seccion 8, requerida para la defensa oral individual |
 | E2: poster e inscripcion WAIMLAP | 16 de octubre | 2 | Borrador corto listo | Inscripcion formal, confirmar requisitos del formulario |
 | E3: entrega completa | 16 de noviembre | 2 | No iniciado | Ejecutar H2, fine-tuning del decoder; evaluacion en Piura real; ampliar a mas de los 89 chips de validacion; ablaciones adicionales de la Parte 6 del borrador |
 | Defensa oral individual | 18 al 20 de noviembre | 6 | No iniciado | Cada integrante debe poder explicar personalmente el pipeline, los resultados y la correccion v2 |

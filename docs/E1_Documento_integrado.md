@@ -130,7 +130,7 @@ El proyecto dispone del repositorio público [INF659 Tarea Académica SAM](https
 
 El entorno reporta Python 3.13.16, PyTorch 2.14.1+cpu, transformers 5.19.0, scikit-image 0.26.0, SciPy 1.18.1 y NumPy 2.5.3. Los scripts utilizan facebook/sam-vit-base. Para ejecutar el pipeline se prepara la carpeta chips desde el ZIP; las salidas se escriben en results_v2. La disección emplea resource de Linux y requiere adaptación para Windows. Deben conservarse todas las dependencias y una revisión inmutable de los pesos.
 
-El muestreo de prompts es determinístico. La imagen sintética del perfilado y el futuro entrenamiento, en cambio, requieren semillas y control de aleatoriedad. El requisito de notebooks reproducibles comunicado por el equipo debe atenderse junto con README y entorno documentado. La conversión de los scripts a notebooks permanece pendiente de decisión y ejecución.
+El muestreo de prompts es determinístico. La imagen sintética del perfilado y el futuro entrenamiento, en cambio, requieren semillas y control de aleatoriedad. El requisito de notebooks reproducibles se atendió: `scripts/run_sam_pipeline_v2.ipynb` y `scripts/fase_a_diseccion.ipynb` reproducen cada script como notebook, celda por función, sin reescribir ni reindentar ninguna línea; una comprobación automática confirmó la reconstrucción línea por línea de ambos archivos originales.
 
 # 8 Cuaderno de decisiones y declaración de IA
 
