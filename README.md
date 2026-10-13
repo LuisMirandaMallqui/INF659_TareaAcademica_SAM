@@ -1,65 +1,58 @@
-# SAM aplicado a mapeo de inundaciones con Sentinel-1 SAR
+# INF659 · SAM sobre Sentinel-1: segmentación de agua con prompts automáticos
 
-Tarea Academica Final, curso INF659 (Deep Learning, PUCP). Pipeline real, de principio a fin: umbral de Otsu sobre la banda VH de Sentinel-1, generacion automatica de prompts de punto, inferencia con los pesos oficiales de SAM (`facebook/sam-vit-base`), e IoU real contra la verdad de terreno de Sen1Floods11, con proyeccion al Niño Costero de 2017 en Piura.
+Proyecto de la tarea académica final de INF659 (Técnicas Avanzadas de Data Mining y Sistemas Inteligentes, Maestría PUCP, 2026-2), a cargo de John Manuel Arzapalo Arana, Luis Alberto Miranda Mallqui y Juan Diego Zavala Viscardo, en el tema del banco **"El costo del prompt en SAM"**: caracterizar dónde y por qué falla el decodificador de máscaras sin prompts humanos y proponer una mitigación.
 
-Punto de partida para seguir el trabajo desde una sesion cloud de Claude Code (con GPU) y aprovechar el credito de computo antes de que venza.
+* **Modelo core:** Segment Anything (SAM) ViT-B, `facebook/sam-vit-base`, revisión fijada `70c1a07f894ebb5b307fd9eaaee97b9dfc16068f`.
+* **Dataset de reto:** Sen1Floods11 v1.1, chips Sentinel-1 etiquetados a mano (VV y VH en dB, 512×512). Es un dominio SAR fuera del preentrenamiento de SAM.
+* **Pregunta de investigación:** ¿puede SAM preentrenado mejorar una máscara de agua obtenida por umbral cuando sus prompts se generan automáticamente a partir de esa misma máscara, y qué componente (prompts, regla de selección, decodificador o representación del codificador) explica su desempeño fuera de dominio?
 
-## Que hay aqui
+## Estructura
 
 ```
-scripts/
-  run_sam_pipeline_v2.py    pipeline completo: Otsu -> prompts automaticos -> SAM -> IoU real
-  run_sam_pipeline_v2.ipynb mismo pipeline como notebook (celdas = funciones del .py, sin reescribir ninguna linea)
-  fase_a_diseccion.py       diseccion instrumentada de SAM: parametros, FLOPs, campo receptivo, latencia, memoria
-  fase_a_diseccion.ipynb    misma diseccion como notebook, mismo orden de celdas que el .py
-docs/
-  estado_consolidado_del_trabajo.md       tabla resumen de todo el avance (entregables, fases, hipotesis, proximos pasos)
-  e1_documento_integrado.md               documento integrado de la entrega E1 (las 8 secciones + anexos)
-  e2_texto_inscripcion_waimlap.md         texto para la inscripcion del poster WAIMLAP (entrega E2)
-  resumen_decisiones_equipo.md            resumen corto de decisiones y avances para el equipo
-  verificacion_citas_parte2.md            verificacion contra la fuente real de las 5 citas de la Parte 2 (estado del arte)
-  e1_borrador_chatgpt.md                  borrador academico original de E1, las ocho partes
-  revision_del_material_claude.md         revision critica que encontro las dos fallas reales corregidas abajo
-  correccion_v2_fuga_de_etiqueta.md       correccion 1: fuga de etiqueta en los prompts negativos (pipeline)
-  fase_a_diseccion_real.md                correccion 2: atencion ventaneada vs global mal asumida (diseccion del modelo)
-  manifiesto_reproducibilidad.md          URLs exactas + sha256 de cada archivo de datos usado
-results/
-  resultados_reales_v2.json      resultados completos por chip (TP/FP/FN, IoU, scores de SAM)
-  fase_a_diseccion_real.json     parametros/FLOPs/latencia/memoria reales del modelo
-  comparacion_real_v2.png        figura: VH real, Otsu abierto, SAM real, verdad de terreno
-data/
-  chips_sen1floods11_reales.zip  los 20 archivos reales (10 chips, S1Hand+LabelHand) ya usados en E1
+notebooks/
+  00_datos_y_reproducibilidad.ipynb        descarga con SHA-256, particiones, exclusión, train-dev
+  01_faseA_diseccion.ipynb                 parámetros y FLOPs medidos por bloque, PCA, campo receptivo efectivo, latencia/memoria
+  02_H1_reproduccion_v2.ipynb              reproducción independiente del pipeline v2 (9 chips del E1)
+  03_validacion_completa_diagnosticos.ipynb H1 en toda la validación, oráculos, calibración, ablaciones A1-A4, sonda por capa
+  04_H2_ajuste_decodificador.ipynb         H2: ajuste exclusivo del decodificador (3 semillas) y control con sonda lineal
+  05_exploratorio_sonda.ipynb              EXPLORATORIO (no pre-registrado): por qué falló la sonda lineal H2-c
+  06_exploratorio_curva_validacion.ipynb   EXPLORATORIO (no pre-registrado): IoU por época en train-dev (¿generaliza o sobreajusta?)
+src/inf659sam/                             código común (datos, línea base, SAM, Fase A, experimentos, estadística)
+results/                                   JSON de resultados, figuras (ES y EN) y referencia del equipo (v2)
+docs/                                      estado del trabajo, protocolo pre-registrado, cuaderno de decisiones, ética y licencias
+docs/historial/                            documentos de etapas anteriores (borradores E1/E2, correcciones v2), ya reemplazados
+tools/ejecutar_notebooks.py                ejecuta los notebooks en orden y guarda las salidas
+tools/figuras_ingles.py                    figuras en inglés para el póster y el resumen de WAIMLAp
+scripts/                                   pipeline v2 y disección originales (referencia; los reemplazan src/ y notebooks/)
+data/chips_sen1floods11_reales.zip         los 20 archivos del E1 (el resto de los datos se descarga en el notebook 00)
 ```
 
-## Como correr lo que ya existe
+**Estado actual y próximos pasos:** `docs/estado_consolidado_del_trabajo.md`.
+
+## Cómo reproducir
 
 ```bash
+python -m venv .venv
+.venv\Scripts\activate            # en Linux/Mac: source .venv/bin/activate
+pip install torch==2.14.1 torchvision --index-url https://download.pytorch.org/whl/cpu
 pip install -r requirements.txt
-cd scripts
-unzip ../data/chips_sen1floods11_reales.zip -d .   # crea scripts/chips/
-python run_sam_pipeline_v2.py
-python fase_a_diseccion.py
+python tools/ejecutar_notebooks.py               # los 6 notebooks en orden (unas 2 h en CPU; ~30 min con GPU)
+python tools/figuras_ingles.py Mekong_977338 India_1050276   # figuras en inglés para el E2
 ```
 
-El requisito de "notebooks reproducibles" del curso se cubre con `run_sam_pipeline_v2.ipynb` y `fase_a_diseccion.ipynb`: cada funcion del `.py` correspondiente es su propia celda, sin reescribir ni reindentar ninguna linea, y la ultima celda llama `main()` (o, en el caso de `fase_a_diseccion`, que no tiene `main()`, las celdas siguen el mismo orden de arriba a abajo que el script). Ejecutar todas las celdas en orden en Jupyter es equivalente a correr el `.py` desde la terminal.
+* Los datos (unos 600 MB), los pesos (375 MB) y las cachés (unos 1.7 GB) se guardan por defecto en `data/`, `models/` y `cache/`, que están ignorados por git. Para moverlos fuera de una carpeta sincronizada (OneDrive, Drive) se usan las variables `INF659_DATA`, `INF659_MODEL` e `INF659_CACHE`.
+* `INF659_THREADS` fija los hilos de CPU (4 por defecto). Con `python tools/ejecutar_notebooks.py --baja-prioridad` el proceso no compite con otras aplicaciones.
+* Las semillas están fijadas (0, 1, 2) y las prompts de evaluación son deterministas. Se verificó que los IoU del pipeline v2 se reproducen en Windows con diferencias menores a 1e-4 frente a la corrida original del equipo en Linux.
+* **No se descargan ni se usan** las particiones `test` y `bolivia`: quedan reservadas para la evaluación final (E3).
 
-## Hallazgo principal (ya reportado en E1)
+## Entorno con el que se generaron los resultados
 
-SAM con prompts automaticos pierde contra el umbral de Otsu en 8 de 9 chips reales (IoU global 0.0897 vs 0.1875), y colapsa a marcar entre 97% y 99.7% de la imagen como agua en 6 de 9 chips: un caso de "mask collapse" fuera de dominio, no una falla de implementacion (las coordenadas de los prompts se verificaron por codigo). El detalle completo, incluida la correccion por fuga de etiqueta, esta en `docs/correccion_v2_fuga_de_etiqueta.md`.
+Windows 11, Python 3.14.7, PyTorch 2.14.1 (CUDA 13.0), transformers 5.19.0, NumPy 2.5.3, SciPy 1.18.1, scikit-image 0.26.0 y scikit-learn 1.9.1. Hardware: AMD Ryzen 7 5700X, 32 GB de RAM y NVIDIA GeForce RTX 3070 de 8 GB. Los embeddings se calcularon en CPU; el ajuste del decodificador, las evaluaciones y el perfilado final se hicieron en GPU. El código detecta la GPU automáticamente; con `INF659_DEVICE=cpu` se fuerza la CPU. Para GPU: `pip install torch==2.14.1 torchvision --index-url https://download.pytorch.org/whl/cu130`.
 
-## Que falta y como seguirlo en una sesion cloud con GPU
+## Licencias y citas
 
-Todo esto esta pendiente porque corre lento o no corre en CPU (el forward pass de SAM aqui tarda ~12 segundos; con GPU deberia ser del orden de 100-200ms, como referencia el equipo ya tenia 135.5ms en una RTX 3060).
+Pesos de SAM bajo Apache-2.0 (Meta AI). Sen1Floods11 no declara licencia en su repositorio, así que los notebooks descargan los chips desde el bucket oficial y no los suben a git. La única excepción es `data/chips_sen1floods11_reales.zip` (20 archivos del E1), pendiente de confirmar con los autores. Ver `docs/etica_limitaciones_licencias.md`.
 
-1. **H2 (Fase B, intervencion de nucleo)**: afinar solo el decodificador de mascaras (4.06M parametros, 22x mas chico que el codificador segun `results/fase_a_diseccion_real.json`) dejando el codificador de imagen congelado, sobre la particion de entrenamiento de Sen1Floods11. El bucket publico es el mismo que ya se usa en `manifiesto_reproducibilidad.md` (`https://storage.googleapis.com/sen1floods11/v1.1/...`); el CSV de entrenamiento deberia estar en `v1.1/splits/flood_handlabeled/flood_train_data.csv` siguiendo el mismo patron que el de validacion ya confirmado, pero **verificar el nombre exacto listando el bucket antes de asumirlo** (`gsutil ls gs://sen1floods11/v1.1/splits/flood_handlabeled/` o el equivalente HTTP), no se confirmo en esta sesion.
-2. **Ampliar de 9 a los 89 chips de validacion completos**: mismo patron de URL, iterar sobre las 89 filas del CSV ya referenciado en el manifiesto en vez de solo la primera fila por region.
-3. **Evaluacion real en Piura**: requiere conseguir una escena Sentinel-1 real de la zona y fecha del Niño Costero 2017 con alguna mascara de referencia (o generar una por fotointerpretacion), eso todavia no esta resuelto.
+## Uso de asistentes de IA
 
-Las 5 citas marcadas `[VERIFICAR]` en `docs/e1_borrador_chatgpt.md` (Parte 2) no son parte de este trabajo de computo; se verifican con busqueda bibliografica normal.
-
-## Integraciones necesarias
-
-- GPU: para que H2 y la ampliacion a 89 chips corran en minutos y no en horas. Confirmar en la UI de la sesion cloud que hardware estara disponible; no se asume de antemano.
-- Red saliente al bucket publico de Google Cloud Storage (`storage.googleapis.com`) para bajar mas chips: no requiere autenticacion, es un bucket publico.
-- Hugging Face (`huggingface.co`) para bajar `facebook/sam-vit-base`: tampoco requiere autenticacion ni token.
-- No se necesita ninguna cuenta ni API key para nada de lo anterior.
+Declarado en `docs/cuaderno_de_decisiones.md`, como exige la política del curso. El protocolo de los experimentos nuevos se registró **antes** de ejecutarlos (`docs/protocolo_preregistrado.md`).

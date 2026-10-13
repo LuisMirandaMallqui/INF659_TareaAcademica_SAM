@@ -1,0 +1,21 @@
+{
+ "advertencia": "exploratorio, no pre-registrado",
+ "filas": [
+  {
+   "sonda": "H2-c original (12 épocas, lr 1e-3)",
+   "AUC_pixel_valid": 0.8307084687107904,
+   "IoU_valid_umbral_0": 0.07708025276842013,
+   "umbral_elegido_en_train": -1.4499999999999993,
+   "IoU_valid_umbral_train": 0.286336197243317,
+   "perdida_final": 1.1134368909729853
+  },
+  {
+   "sonda": "más presupuesto (60 épocas, lr 1e-2)",
+   "AUC_pixel_valid": 0.8695972589590448,
+   "IoU_valid_umbral_0": 0.3153504365312702,
+   "umbral_elegido_en_train": -1.4499999999999993,
+   "IoU_valid_umbral_train": 0.3843822525514045,
+   "perdida_final": 0.9708577205264379
+  }
+ ]
+}

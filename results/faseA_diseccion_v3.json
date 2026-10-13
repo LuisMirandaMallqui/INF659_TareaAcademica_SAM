@@ -1,0 +1,366 @@
+{
+ "entorno": {
+  "python": "3.14.7",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+  "ram_gb": 31.9,
+  "torch": "2.14.1+cu130",
+  "transformers": "5.19.0",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "skimage": "0.26.0",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 3070",
+  "cuda": "13.0",
+  "torch_threads": 8,
+  "model_id": "facebook/sam-vit-base",
+  "model_revision": "70c1a07f894ebb5b307fd9eaaee97b9dfc16068f"
+ },
+ "parametros": {
+  "total": 93735728,
+  "vision_encoder": 89670912,
+  "prompt_encoder": 6476,
+  "mask_decoder": 4058340,
+  "razon_encoder_decoder": 22.09546563373202,
+  "por_bloque": [
+   {
+    "bloque": "vision_encoder.patch_embed",
+    "params": 590592,
+    "pct_total": 0.630060717083245
+   },
+   {
+    "bloque": "vision_encoder.pos_embed",
+    "params": 3145728,
+    "pct_total": 3.3559540925526283
+   },
+   {
+    "bloque": "vision_encoder.layers.0 (ventana 14x14)",
+    "params": 7091328,
+    "pct_total": 7.5652348910118885
+   },
+   {
+    "bloque": "vision_encoder.layers.1 (ventana 14x14)",
+    "params": 7091328,
+    "pct_total": 7.5652348910118885
+   },
+   {
+    "bloque": "vision_encoder.layers.2 (global)",
+    "params": 7104128,
+    "pct_total": 7.57889030317234
+   },
+   {
+    "bloque": "vision_encoder.layers.3 (ventana 14x14)",
+    "params": 7091328,
+    "pct_total": 7.5652348910118885
+   },
+   {
+    "bloque": "vision_encoder.layers.4 (ventana 14x14)",
+    "params": 7091328,
+    "pct_total": 7.5652348910118885
+   },
+   {
+    "bloque": "vision_encoder.layers.5 (global)",
+    "params": 7104128,
+    "pct_total": 7.57889030317234
+   },
+   {
+    "bloque": "vision_encoder.layers.6 (ventana 14x14)",
+    "params": 7091328,
+    "pct_total": 7.5652348910118885
+   },
+   {
+    "bloque": "vision_encoder.layers.7 (ventana 14x14)",
+    "params": 7091328,
+    "pct_total": 7.5652348910118885
+   },
+   {
+    "bloque": "vision_encoder.layers.8 (global)",
+    "params": 7104128,
+    "pct_total": 7.57889030317234
+   },
+   {
+    "bloque": "vision_encoder.layers.9 (ventana 14x14)",
+    "params": 7091328,
+    "pct_total": 7.5652348910118885
+   },
+   {
+    "bloque": "vision_encoder.layers.10 (ventana 14x14)",
+    "params": 7091328,
+    "pct_total": 7.5652348910118885
+   },
+   {
+    "bloque": "vision_encoder.layers.11 (global)",
+    "params": 7104128,
+    "pct_total": 7.57889030317234
+   },
+   {
+    "bloque": "vision_encoder.neck",
+    "params": 787456,
+    "pct_total": 0.8400809561109932
+   },
+   {
+    "bloque": "prompt_encoder (total)",
+    "params": 6476,
+    "pct_total": 0.00690878508992857
+   },
+   {
+    "bloque": "mask_decoder.transformer (two-way, 2 capas)",
+    "params": 3291264,
+    "pct_total": 3.511216128816965
+   },
+   {
+    "bloque": "mask_decoder.upscaling (2 conv transpuestas)",
+    "params": 73952,
+    "pct_total": 0.07889414375701014
+   },
+   {
+    "bloque": "mask_decoder.output_hypernetworks_mlps (4)",
+    "params": 559232,
+    "pct_total": 0.5966049572901381
+   },
+   {
+    "bloque": "mask_decoder.iou_prediction_head",
+    "params": 132612,
+    "pct_total": 0.14147433729858053
+   },
+   {
+    "bloque": "mask_decoder.tokens (iou + 4 mascara)",
+    "params": 1280,
+    "pct_total": 0.0013655412160451775
+   }
+  ]
+ },
+ "flops": {
+  "medido_codificador": 972077334528,
+  "formula_E1_codificador": 930377760768,
+  "medido_por_bloque": {
+   "0": 64936894464,
+   "1": 64936894464,
+   "2": 110326972416,
+   "3": 64936894464,
+   "4": 64936894464,
+   "5": 110326972416,
+   "6": 64936894464,
+   "7": 64936894464,
+   "8": 110326972416,
+   "9": 64936894464,
+   "10": 64936894464,
+   "11": 110326972416
+  },
+  "patch_embed": 4831838208,
+  "neck": 6442450944,
+  "prompt_mas_decoder": 3690388480,
+  "formula_bloque_global": 109521666048,
+  "formula_bloque_ventana": 60932407296
+ },
+ "latencia_pipeline_SAR": {
+  "etapas": {
+   "1 lectura GeoTIFF": {
+    "media_ms": 9.120044444797612,
+    "desv_ms": 1.0398963174804192,
+    "n": 9
+   },
+   "2 Otsu + apertura": {
+    "media_ms": 8.232411111142332,
+    "desv_ms": 1.3487247495198011,
+    "n": 9
+   },
+   "3 prompts automáticos": {
+    "media_ms": 370.5534666660242,
+    "desv_ms": 82.85770044054595,
+    "n": 9
+   },
+   "4 normalización a RGB": {
+    "media_ms": 7.00275555654015,
+    "desv_ms": 1.0028396972974036,
+    "n": 9
+   },
+   "5 preprocesado SAM (1024 px)": {
+    "media_ms": 9.626888889114424,
+    "desv_ms": 3.0716495491238183,
+    "n": 9
+   },
+   "6 codificador de imagen": {
+    "media_ms": 3939.8050777769336,
+    "desv_ms": 211.50710296766948,
+    "n": 9
+   },
+   "7 prompts + decodificador + posproceso": {
+    "media_ms": 43.31974444438755,
+    "desv_ms": 8.350122992403112,
+    "n": 9
+   },
+   "8 evaluación IoU": {
+    "media_ms": 0.8662222220057932,
+    "desv_ms": 0.15312977157686009,
+    "n": 9
+   }
+  },
+  "total_ms_media": 4388.526611110946,
+  "chips": [
+   "India_1050276",
+   "Mekong_1149855",
+   "Nigeria_31096",
+   "Pakistan_43105",
+   "Paraguay_305760",
+   "Somalia_12849",
+   "Spain_1199913",
+   "Sri-Lanka_85652",
+   "USA_826217"
+  ],
+  "hilos": 8,
+  "dispositivo": "cpu"
+ },
+ "memoria": {
+  "antes_de_cargar_mib": {
+   "rss_mib": 674.70703125,
+   "pico_working_set_mib": 674.70703125
+  },
+  "con_modelo_mib": {
+   "rss_mib": 1195.68359375,
+   "pico_working_set_mib": 1209.859375
+  },
+  "final_mib": {
+   "rss_mib": 1953.71875,
+   "pico_working_set_mib": 3581.49609375
+  }
+ },
+ "iou_control_9chips": {
+  "India_1050276": 0.18819802689706558,
+  "Mekong_1149855": 0.12890972356466268,
+  "Nigeria_31096": 0.003494698759808123,
+  "Pakistan_43105": 0.0003541578127213486,
+  "Paraguay_305760": 0.16700447435848406,
+  "Somalia_12849": 0.19806760681780217,
+  "Spain_1199913": 0.035798236640088715,
+  "Sri-Lanka_85652": 0.010034292453074165,
+  "USA_826217": 0.004582274743010758
+ },
+ "latencia_pipeline_SAR_gpu": {
+  "etapas": {
+   "1 lectura GeoTIFF": {
+    "media_ms": 8.044377777777198,
+    "desv_ms": 0.3364842931817197,
+    "n": 9
+   },
+   "2 Otsu + apertura": {
+    "media_ms": 7.248744444546497,
+    "desv_ms": 1.5078126310030524,
+    "n": 9
+   },
+   "3 prompts automáticos": {
+    "media_ms": 357.68738888873486,
+    "desv_ms": 108.66687422711804,
+    "n": 9
+   },
+   "4 normalización a RGB": {
+    "media_ms": 6.234166665914624,
+    "desv_ms": 0.40982843512168854,
+    "n": 9
+   },
+   "5 preprocesado SAM (1024 px)": {
+    "media_ms": 9.708211111299331,
+    "desv_ms": 1.4485970381399795,
+    "n": 9
+   },
+   "6 codificador de imagen": {
+    "media_ms": 198.8794222221865,
+    "desv_ms": 1.5351460829736459,
+    "n": 9
+   },
+   "7 prompts + decodificador + posproceso": {
+    "media_ms": 15.311811109616732,
+    "desv_ms": 1.8579862038220156,
+    "n": 9
+   },
+   "8 evaluación IoU": {
+    "media_ms": 0.7880777799679587,
+    "desv_ms": 0.08063537973552293,
+    "n": 9
+   }
+  },
+  "total_ms_media": 603.9022000000436,
+  "gpu": "NVIDIA GeForce RTX 3070",
+  "memoria_gpu_pico_mib": 2335.4208984375,
+  "iou_9chips": {
+   "India_1050276": 0.18819036451653617,
+   "Mekong_1149855": 0.12887330067538189,
+   "Nigeria_31096": 0.003494698759808123,
+   "Pakistan_43105": 0.00035407630344339204,
+   "Paraguay_305760": 0.16700319703853272,
+   "Somalia_12849": 0.19806333759032638,
+   "Spain_1199913": 0.03580228113127243,
+   "Sri-Lanka_85652": 0.010033929162528965,
+   "USA_826217": 0.004582274743010758
+  }
+ },
+ "latencia_codificador_repeticiones_ms": {
+  "cpu": [
+   3895.663900002546,
+   4092.657199995301,
+   3915.4730000009295,
+   3953.9824000021326,
+   3949.958900004276
+  ],
+  "gpu": [
+   509.7631000026013,
+   211.15550000104122,
+   205.30549999966752,
+   202.09269999759272,
+   200.99610000033863
+  ]
+ },
+ "campo_receptivo_efectivo": {
+  "token": [
+   32,
+   32
+  ],
+  "chips": [
+   "India_1050276",
+   "Mekong_1149855",
+   "Somalia_12849"
+  ],
+  "extension": {
+   "1": {
+    "pixeles_95pct_masa": 28457,
+    "lado_equivalente_px": 168.6920270789346,
+    "bbox_gradiente_no_nulo_yx": [
+     448,
+     671,
+     448,
+     671
+    ]
+   },
+   "2": {
+    "pixeles_95pct_masa": 422840,
+    "lado_equivalente_px": 650.2614858654939,
+    "bbox_gradiente_no_nulo_yx": [
+     0,
+     1023,
+     0,
+     1023
+    ]
+   },
+   "5": {
+    "pixeles_95pct_masa": 567622,
+    "lado_equivalente_px": 753.4069285585314,
+    "bbox_gradiente_no_nulo_yx": [
+     0,
+     1023,
+     0,
+     1023
+    ]
+   },
+   "11": {
+    "pixeles_95pct_masa": 695744,
+    "lado_equivalente_px": 834.1127022171524,
+    "bbox_gradiente_no_nulo_yx": [
+     0,
+     1023,
+     0,
+     1023
+    ]
+   }
+  }
+ }
+}

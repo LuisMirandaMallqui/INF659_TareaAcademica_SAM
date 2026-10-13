@@ -1,10 +1,24 @@
-# Probado con estas versiones (CPU, sin GPU) en octubre 2026.
-# torch se deja sin version exacta a proposito: en una sesion cloud con GPU, pip debe
-# poder resolver la build con soporte CUDA en vez de forzar la build CPU usada aqui.
-numpy>=2.5
-scipy>=1.18
-scikit-image>=0.26
-tifffile>=2024.1
-matplotlib>=3.9
-transformers>=5.19
-torch>=2.14
+# Entorno con el que se ejecutaron los notebooks (Windows 11, Python 3.14.7).
+# PyTorch con GPU (usado en la version final):
+#   pip install torch==2.14.1 torchvision --index-url https://download.pytorch.org/whl/cu130
+# PyTorch solo CPU (tambien funciona, mas lento):
+#   pip install torch==2.14.1 torchvision --index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1
+torchvision==0.29.1
+transformers==5.19.0
+safetensors==0.8.0
+numpy==2.5.3
+scipy==1.18.1
+scikit-image==0.26.0
+scikit-learn==1.9.1
+tifffile==2026.9.20
+imagecodecs==2026.10.10
+pandas==3.0.6
+matplotlib==3.11.2
+psutil==7.2.2
+nbformat==5.11.1
+nbclient==0.11.0
+ipykernel==7.4.0
+qrcode==8.2
+python-docx==1.2.0
+python-pptx==1.0.2
