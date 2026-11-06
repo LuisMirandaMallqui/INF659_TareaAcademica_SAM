@@ -1,0 +1,14 @@
+14:17:15 
+=== test: 89 chips evaluables (1 excluidos por falta de etiqueta) ===
+14:18:30 
+=== test: 89 chips evaluables (1 excluidos por falta de etiqueta) ===
+14:18:31   [test] sin ningún dato del radar (predicción vacía para todos los métodos): Paraguay_34417
+14:19:13 
+=== test: 89 chips evaluables (1 excluidos por falta de etiqueta) ===
+14:19:14   [test] sin ningún dato del radar (predicción vacía para todos los métodos): Paraguay_34417
+14:23:00   [test] sam: IoU global 0.6415 (ensamble + TTA) | IoU medio 0.4048 | semillas 0.6125 ± 0.0511
+14:23:19   [test] unet: IoU global 0.6656 (ensamble + TTA) | IoU medio 0.4212 | semillas 0.6616 ± 0.0032
+14:24:02 
+=== bolivia: 15 chips evaluables (0 excluidos por falta de etiqueta) ===
+14:24:40   [bolivia] sam: IoU global 0.6574 (ensamble + TTA) | IoU medio 0.4376 | semillas 0.6633 ± 0.0162
+14:24:44   [bolivia] unet: IoU global 0.6284 (ensamble + TTA) | IoU medio 0.3971 | semillas 0.6284 ± 0.0058

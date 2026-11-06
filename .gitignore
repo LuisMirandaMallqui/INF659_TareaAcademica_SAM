@@ -11,3 +11,17 @@ data/*
 !data/chips_sen1floods11_reales.zip
 models/
 cache/
+
+# hacia 0.60: estado en vivo y prueba de humo (no son resultados)
+results/hacia_060/estado.json
+results/hacia_060/prueba_rapida/
+results/hacia_060/paso2/estado.json
+results/hacia_060/paso2/prueba_rapida/
+results/hacia_060/paso3/estado.json
+results/hacia_060/paso3/prueba_rapida/
+results/hacia_060/test/estado.json
+results/hacia_060/test/prueba_en_valid/
+referencias/
+results/hacia_060/robustez/estado.json
+results/hacia_060/exploracion/estado.json
+results/hacia_060/exploracion/prueba_rapida/

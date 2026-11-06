@@ -20,6 +20,11 @@ Este documento reemplaza al estado del 11 de octubre, que ahora está en `docs/h
 | H2: ajustar solo el decodificador mejora a SAM preentrenado | **Confirmada.** IoU **0.431 ± 0.038** (3 semillas), también por encima de Otsu en las 3 semillas |
 | H2-c: una sonda lineal 1×1 rinde cerca de H2 | **No se cumplió** (0.073). Según el análisis exploratorio, por calibración del umbral y subajuste |
 | H3: SAM como filtro de regiones candidatas | Pendiente (E3) |
+| H4 (04-nov, paso 1 hacia 0.60): rango fijo en dB, VV/VH, sin prompts y selección en train-dev | **No se confirma con la regla pre-registrada** (`db3_otsu` 0.399). Mejor en valid: `vhdb3_otsu` **0.472 ± 0.017**. Detalle en `docs/bitacora_hacia_060.md` |
+| H5 (04-nov, paso 2 hacia 0.60): LoRA r=8 en el codificador + decodificador, rotaciones y espejados, sin selección | **Se confirma y cruza 0.60 en valid por poco** (regla pre-registrada): `lora_vhdb3_sin` **0.602 ± 0.004**, `lora_db3_otsu` **0.601 ± 0.010** (con ensamble + TTA, 0.615). El IoU medio por chip es 0.38. Detalle en `docs/bitacora_hacia_060.md` |
+| Paso 3a (05-nov): línea base U-Net desde cero, misma entrada `db3` y mismos aumentos | **0.637 ± 0.003** (ensamble + TTA 0.642), por encima de SAM con LoRA en las 3 semillas (+0.027 a +0.042). Es el mejor resultado del trabajo: SAM adaptado no supera a una red simple |
+| Paso 3b (05-nov): `lora_db3_otsu` con Tversky (α 0.3, β 0.7) | 0.615 ± 0.008. **No cumple la regla de mejora** (ningún IC por semilla excluye el cero). El candidato SAM para test sigue siendo `lora_db3_otsu` con ensamble + TTA |
+| **Evaluación final (05-nov), una sola vez** | Candidato SAM (ensamble + TTA): **test 0.642**, **Bolivia 0.657**, así que cruza 0.60 en ambos. U-Net (línea base): test 0.666, Bolivia 0.628. Otsu: test 0.263, Bolivia 0.467. Detalle en la sección 3h de `docs/bitacora_hacia_060.md` |
 
 ## Hallazgos que conviene recordar
 
