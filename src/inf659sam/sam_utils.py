@@ -13,7 +13,7 @@ import numpy as np
 import torch
 
 from . import config
-from .baseline import normalize_band
+from .baseline import load_db_ranges, normalize_band, normalize_band_fixed
 
 
 class SamWrapper:
@@ -36,6 +36,11 @@ class SamWrapper:
 
         vh3     : VH replicada en 3 canales (pipeline v2 del equipo).
         vv_vh_d : [VV, VH, VV-VH] (composicion de bandas, Anexo A del E1).
+        Ambas estiran CADA chip con sus propios percentiles 2-98.
+
+        H4 (hacia 0.60), con rangos FIJOS en dB calculados solo en train:
+        vhdb3   : VH con rango fijo, replicada en 3 canales (aisla el efecto de la normalizacion).
+        db3     : [VV, VH, VV-VH] con rangos fijos (normalizacion + informacion polarimetrica).
         """
         if mode == "vh3":
             ch = normalize_band(vh)
@@ -43,6 +48,15 @@ class SamWrapper:
         if mode == "vv_vh_d":
             diff = np.where(np.isfinite(vv) & np.isfinite(vh), vv - vh, np.nan)
             return np.stack([normalize_band(vv), normalize_band(vh), normalize_band(diff)], axis=-1)
+        if mode in ("vhdb3", "db3"):
+            r = load_db_ranges()
+            ch_vh = normalize_band_fixed(vh, r["vh"]["lo"], r["vh"]["hi"], r["vh"]["mediana"])
+            if mode == "vhdb3":
+                return np.stack([ch_vh, ch_vh, ch_vh], axis=-1)
+            diff = np.where(np.isfinite(vv) & np.isfinite(vh), vv - vh, np.nan)
+            return np.stack([normalize_band_fixed(vv, r["vv"]["lo"], r["vv"]["hi"], r["vv"]["mediana"]), ch_vh,
+                             normalize_band_fixed(diff, r["diff"]["lo"], r["diff"]["hi"], r["diff"]["mediana"])],
+                            axis=-1)
         raise ValueError(mode)
 
     def preprocess(self, rgb: np.ndarray) -> dict:

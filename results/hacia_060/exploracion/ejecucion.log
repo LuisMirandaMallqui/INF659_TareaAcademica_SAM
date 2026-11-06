@@ -1,0 +1,61 @@
+16:12:52 
+=== unet_db3_jrc: E1: U-Net con 4.º canal de agua permanente JRC ===
+16:16:51   [unet_db3_jrc s0] época 10/100  pérdida 0.9026  IoU entrenamiento 0.5173  (6 s)
+16:17:49   [unet_db3_jrc s0] época 20/100  pérdida 0.9009  IoU entrenamiento 0.4812  (6 s)
+16:18:47   [unet_db3_jrc s0] época 30/100  pérdida 0.8027  IoU entrenamiento 0.5284  (6 s)
+16:19:45   [unet_db3_jrc s0] época 40/100  pérdida 0.7704  IoU entrenamiento 0.5619  (6 s)
+16:20:42   [unet_db3_jrc s0] época 50/100  pérdida 0.7570  IoU entrenamiento 0.5813  (6 s)
+16:21:40   [unet_db3_jrc s0] época 60/100  pérdida 0.7338  IoU entrenamiento 0.5946  (6 s)
+16:22:38   [unet_db3_jrc s0] época 70/100  pérdida 0.7149  IoU entrenamiento 0.6145  (6 s)
+16:23:36   [unet_db3_jrc s0] época 80/100  pérdida 0.6865  IoU entrenamiento 0.6241  (6 s)
+16:24:33   [unet_db3_jrc s0] época 90/100  pérdida 0.6977  IoU entrenamiento 0.6204  (6 s)
+16:25:31   [unet_db3_jrc s0] época 100/100  pérdida 0.6842  IoU entrenamiento 0.6215  (6 s)
+16:25:48   [unet_db3_jrc s0] IoU global VALID 0.6416 | IoU medio 0.4085 | P 0.807 R 0.758
+16:26:45   [unet_db3_jrc s1] época 10/100  pérdida 0.9149  IoU entrenamiento 0.4939  (6 s)
+16:27:43   [unet_db3_jrc s1] época 20/100  pérdida 0.8174  IoU entrenamiento 0.5292  (6 s)
+16:28:41   [unet_db3_jrc s1] época 30/100  pérdida 0.7926  IoU entrenamiento 0.5455  (6 s)
+16:29:39   [unet_db3_jrc s1] época 40/100  pérdida 0.7550  IoU entrenamiento 0.5634  (6 s)
+16:30:37   [unet_db3_jrc s1] época 50/100  pérdida 0.7569  IoU entrenamiento 0.5864  (6 s)
+16:31:35   [unet_db3_jrc s1] época 60/100  pérdida 0.7410  IoU entrenamiento 0.5824  (6 s)
+16:32:32   [unet_db3_jrc s1] época 70/100  pérdida 0.7399  IoU entrenamiento 0.5814  (6 s)
+16:33:31   [unet_db3_jrc s1] época 80/100  pérdida 0.7126  IoU entrenamiento 0.6044  (6 s)
+16:34:28   [unet_db3_jrc s1] época 90/100  pérdida 0.7072  IoU entrenamiento 0.6105  (6 s)
+16:35:26   [unet_db3_jrc s1] época 100/100  pérdida 0.6973  IoU entrenamiento 0.6129  (6 s)
+16:35:41   [unet_db3_jrc s1] IoU global VALID 0.6560 | IoU medio 0.4143 | P 0.806 R 0.779
+16:36:38   [unet_db3_jrc s2] época 10/100  pérdida 0.8560  IoU entrenamiento 0.5357  (6 s)
+16:37:36   [unet_db3_jrc s2] época 20/100  pérdida 0.7986  IoU entrenamiento 0.5370  (6 s)
+16:38:34   [unet_db3_jrc s2] época 30/100  pérdida 0.7745  IoU entrenamiento 0.5663  (6 s)
+16:39:32   [unet_db3_jrc s2] época 40/100  pérdida 0.7681  IoU entrenamiento 0.5715  (6 s)
+16:40:30   [unet_db3_jrc s2] época 50/100  pérdida 0.7565  IoU entrenamiento 0.5636  (6 s)
+16:41:28   [unet_db3_jrc s2] época 60/100  pérdida 0.7251  IoU entrenamiento 0.6050  (6 s)
+16:42:25   [unet_db3_jrc s2] época 70/100  pérdida 0.7230  IoU entrenamiento 0.5936  (6 s)
+16:43:23   [unet_db3_jrc s2] época 80/100  pérdida 0.7125  IoU entrenamiento 0.5937  (6 s)
+16:44:21   [unet_db3_jrc s2] época 90/100  pérdida 0.7028  IoU entrenamiento 0.6048  (6 s)
+16:45:19   [unet_db3_jrc s2] época 100/100  pérdida 0.6900  IoU entrenamiento 0.6058  (6 s)
+16:45:33   [unet_db3_jrc s2] IoU global VALID 0.6468 | IoU medio 0.4187 | P 0.807 R 0.765
+16:45:38   [unet_db3_jrc] TERMINADO: valid 0.6481 ± 0.0073 | ensamble + TTA: valid 0.6518, test 0.6728, bolivia 0.5175
+16:45:38 
+=== unet_db3_debil: E2a: preentrenada con etiquetas débiles crudas ===
+16:51:43   [unet_db3_debil s0 débil] época 1/10  pérdida 1.2239  IoU entrenamiento 0.3961  (113 s)
+16:53:20   [unet_db3_debil s0 débil] época 2/10  pérdida 0.8948  IoU entrenamiento 0.5469  (97 s)
+16:54:57   [unet_db3_debil s0 débil] época 3/10  pérdida 0.8148  IoU entrenamiento 0.5612  (97 s)
+16:56:34   [unet_db3_debil s0 débil] época 4/10  pérdida 0.7883  IoU entrenamiento 0.5739  (97 s)
+16:58:11   [unet_db3_debil s0 débil] época 5/10  pérdida 0.7702  IoU entrenamiento 0.5823  (97 s)
+16:59:47   [unet_db3_debil s0 débil] época 6/10  pérdida 0.7614  IoU entrenamiento 0.5854  (97 s)
+17:01:25   [unet_db3_debil s0 débil] época 7/10  pérdida 0.7488  IoU entrenamiento 0.5925  (98 s)
+17:03:05   [unet_db3_debil s0 débil] época 8/10  pérdida 0.7449  IoU entrenamiento 0.5945  (100 s)
+17:04:43   [unet_db3_debil s0 débil] época 9/10  pérdida 0.7363  IoU entrenamiento 0.5981  (98 s)
+17:06:20   [unet_db3_debil s0 débil] época 10/10  pérdida 0.7333  IoU entrenamiento 0.6005  (97 s)
+17:07:20   [unet_db3_debil s0] época 10/100  pérdida 0.7338  IoU entrenamiento 0.5797  (6 s)
+17:08:18   [unet_db3_debil s0] época 20/100  pérdida 0.7944  IoU entrenamiento 0.5022  (6 s)
+17:09:16   [unet_db3_debil s0] época 30/100  pérdida 0.7373  IoU entrenamiento 0.5850  (6 s)
+17:10:13   [unet_db3_debil s0] época 40/100  pérdida 0.6877  IoU entrenamiento 0.6011  (6 s)
+17:11:11   [unet_db3_debil s0] época 50/100  pérdida 0.6791  IoU entrenamiento 0.5979  (6 s)
+17:12:09   [unet_db3_debil s0] época 60/100  pérdida 0.6705  IoU entrenamiento 0.6061  (6 s)
+17:13:07   [unet_db3_debil s0] época 70/100  pérdida 0.6592  IoU entrenamiento 0.6205  (6 s)
+18:14:54 
+=== unet_db3_debil: E2a: preentrenada con etiquetas débiles crudas ===
+18:20:15 
+=== unet_db3_debil: E2a: preentrenada con etiquetas débiles crudas ===
+18:23:40 
+=== unet_db3_debil: E2a: preentrenada con etiquetas débiles crudas ===

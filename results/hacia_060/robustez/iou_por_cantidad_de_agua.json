@@ -1,0 +1,142 @@
+{
+ "test": {
+  "SAM + LoRA": [
+   {
+    "agua": "< 1 %",
+    "chips": 28,
+    "chips_con_iou": 26,
+    "iou_medio": 0.14995154185862752,
+    "iou_global_del_grupo": 0.11330159505208333,
+    "pct_de_los_pixeles_de_union": 3.3484193412908705
+   },
+   {
+    "agua": "1–10 %",
+    "chips": 37,
+    "chips_con_iou": 37,
+    "iou_medio": 0.41044645904862453,
+    "iou_global_del_grupo": 0.3836455981941309,
+    "pct_de_los_pixeles_de_union": 15.089414145831864
+   },
+   {
+    "agua": "10–30 %",
+    "chips": 10,
+    "chips_con_iou": 10,
+    "iou_medio": 0.6754211699125392,
+    "iou_global_del_grupo": 0.689666555872863,
+    "pct_de_los_pixeles_de_union": 15.064310538099408
+   },
+   {
+    "agua": "> 30 %",
+    "chips": 14,
+    "chips_con_iou": 14,
+    "iou_medio": 0.6697402376450794,
+    "iou_global_del_grupo": 0.7157492882629723,
+    "pct_de_los_pixeles_de_union": 66.49785597477786
+   }
+  ],
+  "U-Net": [
+   {
+    "agua": "< 1 %",
+    "chips": 28,
+    "chips_con_iou": 26,
+    "iou_medio": 0.16718936634854129,
+    "iou_global_del_grupo": 0.14735488338733213,
+    "pct_de_los_pixeles_de_union": 2.672901873173176
+   },
+   {
+    "agua": "1–10 %",
+    "chips": 37,
+    "chips_con_iou": 37,
+    "iou_medio": 0.41794386889195795,
+    "iou_global_del_grupo": 0.37336133409747635,
+    "pct_de_los_pixeles_de_union": 16.494805151449345
+   },
+   {
+    "agua": "10–30 %",
+    "chips": 10,
+    "chips_con_iou": 10,
+    "iou_medio": 0.6820594909152231,
+    "iou_global_del_grupo": 0.6846521412083187,
+    "pct_de_los_pixeles_de_union": 15.335719132769507
+   },
+   {
+    "agua": "> 30 %",
+    "chips": 14,
+    "chips_con_iou": 14,
+    "iou_medio": 0.7153450957801301,
+    "iou_global_del_grupo": 0.7558351257157334,
+    "pct_de_los_pixeles_de_union": 65.49657384260797
+   }
+  ]
+ },
+ "bolivia": {
+  "SAM + LoRA": [
+   {
+    "agua": "< 1 %",
+    "chips": 3,
+    "chips_con_iou": 3,
+    "iou_medio": 0.0005053057099545225,
+    "iou_global_del_grupo": 0.0008920606601248885,
+    "pct_de_los_pixeles_de_union": 0.6423087207303564
+   },
+   {
+    "agua": "1–10 %",
+    "chips": 6,
+    "chips_con_iou": 6,
+    "iou_medio": 0.4366224336986612,
+    "iou_global_del_grupo": 0.4848893656076875,
+    "pct_de_los_pixeles_de_union": 17.272050116505596
+   },
+   {
+    "agua": "10–30 %",
+    "chips": 2,
+    "chips_con_iou": 2,
+    "iou_medio": 0.5383681188725093,
+    "iou_global_del_grupo": 0.45383695038053773,
+    "pct_de_los_pixeles_de_union": 11.493563543298063
+   },
+   {
+    "agua": "> 30 %",
+    "chips": 4,
+    "chips_con_iou": 4,
+    "iou_medio": 0.716322785609268,
+    "iou_global_del_grupo": 0.7387731800890678,
+    "pct_de_los_pixeles_de_union": 70.59207761946598
+   }
+  ],
+  "U-Net": [
+   {
+    "agua": "< 1 %",
+    "chips": 3,
+    "chips_con_iou": 3,
+    "iou_medio": 0.003961516694963215,
+    "iou_global_del_grupo": 0.006423982869379015,
+    "pct_de_los_pixeles_de_union": 0.638133814845542
+   },
+   {
+    "agua": "1–10 %",
+    "chips": 6,
+    "chips_con_iou": 6,
+    "iou_medio": 0.37068619073332726,
+    "iou_global_del_grupo": 0.4334418716835504,
+    "pct_de_los_pixeles_de_union": 16.186618515445804
+   },
+   {
+    "agua": "10–30 %",
+    "chips": 2,
+    "chips_con_iou": 2,
+    "iou_medio": 0.467109573776544,
+    "iou_global_del_grupo": 0.4024164271668431,
+    "pct_de_los_pixeles_de_union": 10.32414230637841
+   },
+   {
+    "agua": "> 30 %",
+    "chips": 4,
+    "chips_con_iou": 4,
+    "iou_medio": 0.6965526925785355,
+    "iou_global_del_grupo": 0.7092454943488443,
+    "pct_de_los_pixeles_de_union": 72.85110536333025
+   }
+  ]
+ }
+}

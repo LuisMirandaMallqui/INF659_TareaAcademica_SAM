@@ -1,0 +1,6 @@
+Python: C:\Users\plata\inf659_env\venv\Scripts\python.exe
+GPU: NVIDIA GeForce RTX 3070 | por correr: 6 semillas
+AVANCE TOTAL:   0.0% |          | 00:00 transcurrido, ~? restante                                                                 AVANCE TOTAL:   0.0% |          | 00:00 transcurrido, ~? restante
+=== unet_db3_debil: E2a: preentrenada con etiquetas débiles crudas ===
+
+  Preparando chips: 0/440 chip |          | ?chip/s[A

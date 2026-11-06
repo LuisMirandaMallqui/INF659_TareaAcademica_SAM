@@ -56,6 +56,10 @@ Después de ver que H2-c rindió muy por debajo de lo esperado, se agregó el no
 
 **Desviación declarada.** El protocolo indicaba 10 000 remuestreos bootstrap; los notebooks 03 y 04 usaron **5 000** para acortar la ejecución. Con 5 000 remuestreos, el error Monte Carlo en los percentiles 2.5 y 97.5 es del orden de milésimas de IoU, despreciable frente al ancho de los intervalos reportados. Ninguna conclusión depende de esa diferencia.
 
+## 3 quater. Experimentos posteriores (E3): hacia IoU 0.60
+
+El 4 de noviembre de 2026 se pre-registró **H4** (paso 1 hacia 0.60: rango fijo en dB, canales VV/VH, variante sin prompts, y elección de época y umbral en train-dev), **antes de ejecutarlo**. El protocolo completo, el estado de cada estrategia y los resultados están en `docs/bitacora_hacia_060.md`. Este documento no cambia: H1, H2 y H2-c conservan su protocolo original.
+
 ## 4. Qué cuenta como resultado negativo
 
 Si H2 no supera a SAM preentrenado, o lo supera sin alcanzar a Otsu, **se reporta tal cual**. Lo mismo vale si la sonda H2-c iguala o supera al decodificador ajustado. Ningún resultado de este protocolo se omite del informe.

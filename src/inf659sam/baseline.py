@@ -25,6 +25,34 @@ def normalize_band(band: np.ndarray, lo_pct: float = 2, hi_pct: float = 98) -> n
     return (out * 255).astype(np.uint8)
 
 
+def normalize_band_fixed(band: np.ndarray, lo: float, hi: float, fill: float) -> np.ndarray:
+    """Rango FIJO en dB -> uint8 (H4, hacia 0.60). Igual para todos los chips.
+
+    A diferencia de `normalize_band`, no estira cada chip con sus propios percentiles: un
+    pixel de -25 dB queda igual de oscuro en cualquier chip, asi que un chip sin agua ya no
+    "parece" tener agua. Los NaN (sin dato del sensor) se rellenan con un valor fijo `fill`.
+    """
+    band = np.where(np.isfinite(band), band, fill)
+    out = np.clip((band - lo) / (hi - lo), 0, 1)
+    return (out * 255).astype(np.uint8)
+
+
+DB_RANGES_FILE = None  # Path para sobrescribir la ubicacion (solo la prueba rapida lo usa)
+
+
+def load_db_ranges() -> dict:
+    """Rangos fijos en dB calculados SOLO con `train` (results/hacia_060/rangos_db.json)."""
+    import json
+
+    from . import config
+
+    path = DB_RANGES_FILE or (config.RESULTS_DIR / "hacia_060" / "rangos_db.json")
+    if not path.exists():
+        raise FileNotFoundError(f"Faltan los rangos fijos en dB ({path}). Se calculan en la etapa 1 de "
+                                "tools/hacia060_paso1.py")
+    return json.loads(path.read_text(encoding="utf-8"))["rangos"]
+
+
 def otsu_masks(vv: np.ndarray, vh: np.ndarray) -> dict:
     """Otsu sobre VH (dB) con validez del sensor; mascara cruda y con apertura (disco r=1)."""
     sensor_valid = np.isfinite(vv) & np.isfinite(vh)

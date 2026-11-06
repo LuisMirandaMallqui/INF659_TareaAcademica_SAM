@@ -1,0 +1,26 @@
+@echo off
+REM Bloque de robustez y exploracion (bitacora, seccion 2d). Uso: tools\lanzar_robustez.bat <script.py> [args]
+REM   tools\lanzar_robustez.bat hacia060_semillas_extra.py
+chcp 65001 >nul
+set PYTHONUTF8=1
+set PYTHONIOENCODING=utf-8
+cd /d "%~dp0.."
+
+set "ENV_DIR=%USERPROFILE%\inf659_env"
+if exist "%ENV_DIR%\venv\Scripts\python.exe" (
+    if not defined INF659_DATA set "INF659_DATA=%ENV_DIR%\data"
+    if not defined INF659_CACHE set "INF659_CACHE=%ENV_DIR%\cache"
+    if not defined INF659_MODEL set "INF659_MODEL=%ENV_DIR%\models\sam-vit-base"
+    set "PY=%ENV_DIR%\venv\Scripts\python.exe"
+) else if exist ".venv\Scripts\python.exe" (
+    set "PY=.venv\Scripts\python.exe"
+) else (
+    set "PY=python"
+)
+if not defined INF659_THREADS set INF659_THREADS=8
+
+title Hacia 0.60 - robustez: %1
+echo Python: %PY%
+"%PY%" tools\%*
+echo.
+echo Fin de %1

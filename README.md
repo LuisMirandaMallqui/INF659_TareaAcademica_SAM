@@ -29,6 +29,8 @@ data/chips_sen1floods11_reales.zip         los 20 archivos del E1 (el resto de l
 
 **Estado actual y próximos pasos:** `docs/estado_consolidado_del_trabajo.md`.
 
+**Hacia IoU 0.60 (E3):** la bitácora `docs/bitacora_hacia_060.md` registra cada estrategia, su estado y sus resultados. El paso 1 se ejecuta con doble clic en `tools\lanzar_hacia060.bat`, que abre una ventana con el % de avance (o con `python tools/hacia060_paso1.py`; agregar `--rapido` para una prueba de humo de unos 2 minutos).
+
 ## Cómo reproducir
 
 ```bash
