@@ -27,7 +27,7 @@ Registro de lo que probamos para pasar de **0.431** (H2) a la meta de **0.60** q
 | 2 | **LoRA en el codificador + decodificador, con rotaciones y espejados al vuelo** (H5) | El codificador congelado "ve" poco el SAR (sonda 0.93 contra 0.906 de los dB crudos). Los trabajos que superan 0.55 ajustan el codificador. El paso 1 agotó lo que da el decodificador solo | ✅ Terminado (04-nov) · **sirve: cruza 0.60 en valid, por poco** | Métrica principal (regla pre-registrada): `lora_vhdb3_sin` **0.602 ± 0.004** y `lora_db3_otsu` **0.601 ± 0.010**, ambas ≥ 0.60. `lora_vhdb3_otsu` 0.596 ± 0.016. Las 9 semillas superan al paso 1 (+0.11 a +0.16) y a H2 (+0.11 a +0.22) con IC 95 % que excluyen el cero. Mejor secundaria: `lora_db3_otsu` con ensamble + TTA, 0.615. Margen mínimo: 4 de 9 semillas quedan bajo 0.60 (ver 3d) |
 | 3a | **Línea base U-Net** desde cero, con los mismos chips, la misma entrada y los mismos aumentos | Comparación honesta exigida en el E3: ¿SAM aporta algo frente a una red simple? | ✅ Terminado (05-nov) · ⚠️ **supera a SAM** | **0.637 ± 0.003** (ensamble + TTA 0.642), contra 0.601 de `lora_db3_otsu`. Gana en las 3 semillas (+0.027 a +0.042, Wilcoxon p ≤ 0.035), aunque el IC por chip excluye el cero solo en 1 de 3. Es el mejor resultado de todo el trabajo, con 10 min de entrenamiento por semilla y sin preentrenamiento (sección 3f) |
 | 3b | **Pérdida Tversky** (α 0.3, β 0.7) en vez de Dice, sobre `lora_db3_otsu` | El error dominante del paso 2 es el agua no detectada (sensibilidad 0.68–0.74 contra precisión 0.76–0.82) | ✅ Terminado (05-nov) · ❌ **no cumple la regla de mejora** | **0.615 ± 0.008** (ensamble + TTA 0.622), +0.014 sobre el paso 2, pero ningún IC por semilla excluye el cero (se pedían 2 de 3). La sensibilidad sube algo (0.75 contra 0.70) y la precisión baja (0.77 contra 0.81), como se esperaba. El candidato para test sigue siendo `lora_db3_otsu` con ensamble + TTA |
-| 3c | Preentrenar con etiquetas débiles (4 385 chips) y ajustar con las manuales | El IoU de entrenamiento es casi igual al de valid: al modelo le falta aprendizaje, no se sobreajusta. Garg et al.: +1 a +3 puntos | ⬜ Pendiente (requiere descargar ~10 GB) | — |
+| 3c | Preentrenar con etiquetas débiles (4 385 chips) y ajustar con las manuales | El IoU de entrenamiento es casi igual al de valid: al modelo le falta aprendizaje, no se sobreajusta. Garg et al.: +1 a +3 puntos | ❌ Cancelado por el equipo (05-nov), antes de terminar la primera semilla | Sin resultado. Se intentó como exploración E2 (sección 2d); detalle en el registro cronológico |
 | 5 | Evaluación final en `test` y `bolivia` | Reservada para el E3 | ✅ Terminado (05-nov), una sola vez · **cruza 0.60** | Candidato SAM (ensamble + TTA): **test 0.642**, **Bolivia 0.657**. U-Net (línea base): test 0.666, Bolivia 0.628. Otsu: 0.263 y 0.467. La U-Net gana en test y SAM gana en Bolivia, la región que ninguno vio al entrenar (sección 3h) |
 
 Leyenda: ✅ terminado · ⏳ en curso · ⬜ pendiente · ❌ descartado (con motivo).
@@ -515,7 +515,7 @@ Reportamos el **IoU global** como métrica principal y el **IoU medio por chip**
 * **Hipótesis, no probada:** el modelo aprende a fiarse del mapa de agua permanente y deja de marcar la inundación donde el mapa no indica agua. Eso es justo lo que no se quiere en un detector de inundaciones.
 * **Recomendación:** no usar la capa JRC como entrada.
 
-**E1 y E2, exploratorio (se actualiza solo):**
+**E1 y E2, exploratorio.** Esta tabla se generaba sola mientras corría la cola. Quedó fija al cancelarse E2, y su estado se corrigió a mano el 05-nov a las 21:45:
 
 <!-- RESULTADOS_EXPLORACION:INICIO (se regenera solo; no editar a mano dentro) -->
 
@@ -524,8 +524,8 @@ Reportamos el **IoU global** como métrica principal y el **IoU medio por chip**
 | Variante | Qué es | IoU global valid (3 semillas) | Ensamble + TTA valid | Δ vs `unet_db3` valid (IC 95 %) | Test, ensamble + TTA | Bolivia, ensamble + TTA | IoU medio valid |
 |---|---|---|---|---|---|---|---|
 | `unet_db3_jrc` | E1: U-Net con 4.º canal de agua permanente JRC | **0.648 ± 0.007** | 0.652 | +0.010 [-0.002, +0.022] | 0.673 | 0.517 | 0.414 |
-| `unet_db3_debil` | E2a: preentrenada con etiquetas débiles crudas | ⏳ 0/3 semillas | | | | | |
-| `unet_db3_debil_jrc` | E2b: preentrenada con débiles corregidas con JRC | ⏳ 0/3 semillas | | | | | |
+| `unet_db3_debil` | E2a: preentrenada con etiquetas débiles crudas | ❌ Cancelada, sin resultado | | | | | |
+| `unet_db3_debil_jrc` | E2b: preentrenada con débiles corregidas con JRC | ❌ Cancelada, nunca empezó | | | | | |
 
 _Actualizado automáticamente: 2026-11-05 18:23_
 
@@ -551,6 +551,10 @@ _Actualizado automáticamente: 2026-11-05 18:23_
 | 2026-11-05, 18:15 | La cola exploratoria se detuvo a las 17:13, durante E2a semilla 0, sin error en el log ni reinicio de Windows. Lo más probable es que se reiniciara la app que alojaba la terminal (no confirmado) | E1 quedó completa. Se relanza en una ventana independiente de la app, y ahora el preentrenamiento se guarda para no repetirlo. Se repite solo E2a semilla 0; el protocolo no cambia |
 | 2026-11-05, 14:25 | **Desviación, decidida sin ver ningún resultado.** El primer intento se detuvo al preparar los chips, antes de cualquier predicción, porque Paraguay_34417 (test) no tiene ningún píxel con dato del radar pero sí 50 026 píxeles de agua etiquetada. Regla agregada: ese chip se queda con la máscara vacía para todos los métodos, así que todo su agua cuenta como FN. Se reporta además la métrica sin ese chip | Se relanza la evaluación |
 | 2026-11-05, 14:30 | **Evaluación final en test y Bolivia**, una sola vez. Se descargaron 105 chips | Candidato SAM: test **0.642**, Bolivia **0.657**: cruza 0.60 en ambos. U-Net: test 0.666, Bolivia 0.628. La U-Net gana dentro de las regiones de entrenamiento y SAM, en la región no vista (sección 3h) |
+| 2026-11-05, 18:14–18:23 | Tres relanzamientos de E2a semilla 0 (18:14, 18:20 y 18:23). La primera ventana se congeló por el modo de selección de la consola (QuickEdit), que se desactivó. La segunda se cerró sin causa identificada, y la tercera corrió oculta | Ningún relanzamiento produjo resultados |
+| 2026-11-05, después de las 18:23 | **El equipo canceló la exploración restante.** Ya no quedan procesos de entrenamiento | E2a y E2b quedan sin resultado. E1, R1 y R2 sí terminaron. No se entrena nada más salvo que surjan cambios tras la reunión con el profesor |
+| 2026-11-05, 21:45 | El equipo consiguió los PDF de DeepSARFlood y Wang et al., y se leyeron completos | Se corrigen las secciones 5, 5b y 5c, y se agrega la 5d. Ningún resultado nuestro cambia |
+| 2026-11-06 | Póster y abstract de WAIMLAp rehechos con los resultados finales y las correcciones de los revisores, con asistencia de Claude Code (Opus 5.5). Figuras con `tools/figuras_poster_waimlap.py`: solo inferencia con los pesos guardados, y cada máscara reproduce el IoU por chip ya guardado | Archivos en `docs/waimlap_2026/`. No se entrenó nada ni se tomó ninguna decisión nueva sobre test |
 
 ## 5. De dónde salen las ideas
 
@@ -562,10 +566,10 @@ _Actualizado automáticamente: 2026-11-05 18:23_
 | Yadav et al. 2022, Frontiers in Remote Sensing | Attentive U-Net, VV+VH+ratio | ~0.67 |
 | SAMed (arXiv 2304.13785) | LoRA en el codificador de SAM y entrenamiento sin prompts | Médico: base del diseño "sin prompts" |
 | *Agregado el 05-nov, después de test:* Bonafilia et al. 2020 (CVPRW), el paper del dataset | FCNN ResNet50; IoU **medio por chip** | Test 0.31 (manuales) a 0.41 (débiles S2); Bolivia 0.35 a 0.39 |
-| DeepSARFlood (2025, ScienceDirect) | Ensambles de ViT para SAR, con incertidumbre | IoU ~0.72 en test de Sen1Floods11, según el resumen (no verificado) |
+| DeepSARFlood (Sharma y Saharia 2025, *Science of Remote Sensing* 11) | Ensambles de CNN y ViT con radar, terreno y agua permanente, y etiquetas débiles propias | 0.723 en el test oficial con el mejor modelo individual; 0.715 con el ensamble. No declara cómo agrega el IoU (ver 5d) |
 | PANGAEA (arXiv 2412.04204) | Benchmark de modelos fundacionales geoespaciales | mIoU de 2 clases ~0.89–0.91 (otra métrica); una U-Net supervisada supera a la mayoría de los modelos fundacionales |
 | Prithvi-CAFE (arXiv 2601.02315) | Prithvi con fusión adaptativa | ~0.83 en test; en Bolivia, TerraMind 0.62 contra U-Net 0.60 (entradas multimodales) |
-| Wang, Neal, Atkinson y Zhang (SSRN) | Cinco métodos de ajuste eficiente de SAM en SAR; LoRA el mejor | IoU de ~0.70 a ~0.90 (datasets no confirmados) |
+| Wang, Neal, Atkinson y Zhang (preprint SSRN 5373217, sin revisión por pares) | Cinco métodos de ajuste eficiente de SAM ViT-B sobre UrbanSARFloods; LoRA el mejor | Con LoRA, Weihui 0.766 y Jubba 0.951, cifras que no cuadran con su F1 ni su recall. **Corrección:** el "~0.70 a ~0.90" que anoté antes no es una mejora, sino el nivel aproximado de esas dos regiones ya ajustadas (ver 5d) |
 | Banerjee y Daou 2026 (arXiv 2606.16302) | U-Net contra SegFormer en SAR, solo agua de inundación | IoU 0.38–0.42 (clase distinta); al ajustar en Sen1Floods11, la diferencia entre arquitecturas cae dentro del ruido |
 
 ### 5b. Estado del arte desde 2020 (búsqueda del 05-nov, después de test)
@@ -578,11 +582,11 @@ Casi ningún número es comparable entre papers, porque cambian la métrica (IoU
    * En el benchmark PANGAEA, **una U-Net supervisada supera a la mayoría de los modelos fundacionales** en Sen1Floods11, igual que en nuestro trabajo.
    * En Bolivia, Prithvi-CAFE reporta TerraMind 0.62 contra U-Net 0.60. Es el mismo patrón que vimos: el preentrenado generaliza algo mejor a la región no vista.
 2. **Solo radar (lo comparable con nosotros).**
-   * DeepSARFlood (2025), con ensambles de ViT: ~0.72 en test, según el resumen.
+   * DeepSARFlood (2025): 0.72 en test. **Corrección tras leerlo:** no es solo radar, porque también usa terreno y agua permanente, así que no es comparable con nosotros (ver 5d).
    * Una U-Net comunitaria con ResNet34 sobre VV y VH: 0.675 en el test oficial.
    * Banerjee y Daou (2026) comparan U-Net y SegFormer: al ajustar en Sen1Floods11, la diferencia cae dentro del ruido. Miden solo inundación, sin agua permanente.
 3. **SAM en radar.**
-   * Wang et al. (SSRN) prueban cinco métodos de ajuste eficiente, y LoRA es el mejor.
+   * Wang et al. (preprint en SSRN) prueban cinco métodos de ajuste eficiente sobre UrbanSARFloods, otro dataset, y LoRA es el mejor (ver 5d).
    * No se encontró un benchmark publicado de SAM sobre Sen1Floods11 con solo radar. Nuestro resultado (test 0.642, Bolivia 0.657) llena ese hueco.
 
 **Lectura para nuestro trabajo:**
@@ -592,15 +596,15 @@ Casi ningún número es comparable entre papers, porque cambian la métrica (IoU
 
 ### 5c. Lectura de los trabajos comparables (05-nov, después de test)
 
-Solo se leyeron trabajos con **Sentinel-1 solamente, sobre las etiquetas manuales de Sen1Floods11**. Los PDF están en `referencias/`, que se ignora en git.
+Solo se leyeron trabajos con **Sentinel-1 solamente, sobre las etiquetas manuales de Sen1Floods11**. Los PDF están en `referencias/`, que se ignora en git. Las dos últimas filas se actualizaron después, al conseguir esos papers; ninguno de los dos cumple ese criterio (ver 5d).
 
 | Trabajo | Qué es comparable | Números | Qué nos aporta |
 |---|---|---|---|
 | **Garg et al. 2023** (Google, arXiv 2302.08180). Leído completo | Solo VV y VH, partición oficial, **IoU global** (TP, FP y FN sumados sobre todas las imágenes), recorte fijo en dB (VV [−20, 0], VH [−30, 0]) | DeepLabv3+ con etiquetas manuales: **0.676 ± 0.005** (5 corridas, a 16 m). Solo etiquetas débiles de Sen1Floods11: 0.678 (**no mejora**). Débiles corregidas con el mapa de ocurrencia de agua JRC: 0.706. Destilación desde un maestro S1+S2: 0.719 (0.727 a 10 m) | (1) Nuestra U-Net (0.666) y SAM (0.642) están en su nivel con etiquetas manuales. (2) **Las etiquetas débiles solas no ayudan**: la 3c solo vale con corrección JRC o con destilación desde un maestro con Sentinel-2. (3) Tversky focal le sumó +0.019 en valid, en la misma dirección que nuestro +0.014. (4) Una salida de mayor resolución ayudó (+0.011), lo que apoya la hipótesis de que la máscara de 256×256 de SAM pesa. (5) Reportan 5 corridas: conviene pasar de 3 a 5 semillas |
 | **sar-flood-unet** (repositorio comunitario; README y código leídos) | Solo VV y VH en dB, recorte por percentiles 0.5–99.5 de train, partición oficial, **IoU global**, D4 | U-Net con ResNet34 de ImageNet: **test 0.675, Bolivia 0.576**. **Umbral fijo en VH con filtro de mediana 5×5, ajustado en train: test 0.592, Bolivia 0.617** | (1) **Nuestro Otsu por chip (0.263 / 0.467) es una línea base débil.** Un umbral fijo ajustado en train con filtro de speckle es mucho más fuerte y en Bolivia supera a su U-Net. (2) En Bolivia, nuestro SAM (0.657) y nuestra U-Net (0.628) superan ese umbral filtrado (0.617), pero por poco. (3) Ellos excluyen Paraguay_34417; lo comparable con eso es nuestro "sin ese chip": SAM 0.653 y U-Net 0.677 |
 | **Banerjee y Daou 2026** (arXiv 2606.16302). Leído | Solo radar y etiquetas manuales, pero en **3 clases** (inundación y agua permanente por separado, con JRC) y sobre 27 chips de test. **Solo parcialmente comparable** | Clase inundación: U-Net 0.408 contra SegFormer-b2 0.418. Diferencia +0.026 [−0.003, +0.057], **p = 0.34** | (1) En Sen1Floods11, la diferencia entre arquitecturas cae dentro del ruido entre chips, como entre nuestra U-Net y SAM. (2) Usan la misma estadística que nosotros (Wilcoxon y bootstrap por chip), lo que respalda nuestra metodología. (3) Preentrenan con ETCI (66 000 teselas de Sentinel-1), una fuente extra de datos de radar. (4) La TTA aporta poco, como nos pasó a nosotros |
-| **DeepSARFlood** (Sharma y Saharia 2025; solo README y resumen, el paper está bloqueado) | Radar con terreno y agua permanente, etiquetas débiles de óptico, ensambles CNN/ViT | "0.72 en Sen1Floods11" (README) o 0.755 (resumen). Métrica y partición no especificadas | Ideas: entradas auxiliares (terreno/HAND, agua permanente JRC) y ensambles diversos. **Su número no se puede comparar con el nuestro sin el paper** |
-| Wang, Neal, Atkinson y Zhang (SAM con ajuste eficiente en SAR) | — | No accesible (SSRN 403). Solo existe un resumen del EGU 2025 sin el dataset confirmado | **Descartado:** no se pudo verificar que use Sen1Floods11 |
+| **DeepSARFlood** (Sharma y Saharia 2025). Leído completo el 05-nov | Solo la partición: test oficial de 90 chips. Usa radar con terreno y agua permanente, y 4 441 parches con etiquetas débiles propias. **No comparable** | 0.723 con Swin-V2 solo; 0.715 con el ensamble. Agregación del IoU no declarada. El 0.755 que anoté de otro resumen no aparece en esta versión | Información óptica durante el entrenamiento como posible vía de mejora; respalda no usar etiquetas débiles crudas (ver 5d) |
+| **Wang, Neal, Atkinson y Zhang** (preprint SSRN 5373217). Leído completo el 05-nov | Solo el método: SAM ViT-B con LoRA. Usa UrbanSARFloods con una imagen previa al evento. **Cifras no comparables** | Con LoRA, Weihui 0.766 y Jubba 0.951. Estos IoU no cuadran con su F1 ni su recall | **Referencia de método, no de cifras:** ajustar el codificador es lo que importa, y LoRA gana entre cinco métodos (ver 5d) |
 
 **Qué haríamos con esto** (todo exploratorio, porque test ya se usó):
 1. **Agregar una línea base clásica fuerte**: umbral fijo en VH ajustado solo en train, con filtro de mediana 5×5. Es barato y hace más justa la comparación del E3. Se reportaría como línea base decidida después de ver test.
@@ -609,6 +613,52 @@ Solo se leyeron trabajos con **Sentinel-1 solamente, sobre las etiquetas manuale
 4. **Probar la capa JRC de agua permanente como canal extra** (DeepSARFlood, Banerjee). Sen1Floods11 la trae por chip.
 
 Hallazgos en el código del repo que motivaron el paso 1: `baseline.normalize_band` (percentiles por chip), `config.BAND_USED = "VH"` y `decoder_ft._prompt_batch` (positivos dentro de Otsu incluso en chips sin agua real).
+
+### 5d. DeepSARFlood y Wang et al., leídos completos (05-nov, 21:45)
+
+El equipo consiguió ambos PDF, que no están en `referencias/`. Las comprobaciones de abajo son cálculo nuestro sobre sus tablas. Con una sola matriz de confusión, F1 = 2PR / (P + R) e IoU = 1 / (1/P + 1/R − 1), y el IoU nunca supera al F1 ni al recall. Que no cuadre no prueba un error de los autores: lo más probable es que agreguen el IoU de otra forma, y ninguno de los dos papers lo aclara.
+
+**DeepSARFlood** (Sharma y Saharia 2025, [doi:10.1016/j.srs.2025.100203](https://doi.org/10.1016/j.srs.2025.100203)).
+
+* **Por qué no se compara:**
+  * Entrada: VV, VH, elevación, pendiente, HAND y agua permanente.
+  * Entrenamiento: 4 441 parches con etiquetas débiles propias, 1 120 de Sen1Floods11 y 3 321 de otros eventos.
+  * Validación: 341 chips manuales.
+  * No reporta Bolivia. Sus otras pruebas (Pakistán y Assam) se miden contra etiquetas de Sentinel-2.
+* **El 0.72 no es del ensamble:** Swin-V2 solo da 0.723 y el ensamble 0.715 en test. El ensamble sí gana en los dos casos de estudio.
+* **Lo que aporta:**
+  * El modelo base da 0.682 y sube a 0.712 al predecir también el índice óptico MNDWI durante el entrenamiento.
+  * Garg et al. llegan a 0.719 con una idea parecida. **Hipótesis nuestra, sin probar:** lo que nos separa de 0.72 sería sobre todo información óptica al entrenar, no otra arquitectura.
+  * Respalda no usar las etiquetas débiles crudas de Sen1Floods11: conserva 1 120 de 4 385 parches, con etiquetas rehechas.
+  * Usa Tversky con más peso en los FN (α 0.7 en su fórmula), igual que nuestro β 0.7.
+
+**Wang et al.** (preprint sin revisión por pares, [SSRN 5373217](https://ssrn.com/abstract=5373217)).
+
+* **Por qué no se compara:**
+  * Dataset: UrbanSARFloods, con 4 502 muestras de entrenamiento.
+  * Entrada: VH antes del evento, y VH y VV después. La imagen previa le da información de cambio que nosotros no tenemos.
+  * Evaluación: dos regiones, con una sola semilla.
+* **Diferencia de diseño:** con LoRA congela el decodificador (366 mil parámetros entrenables). Nosotros entrenamos LoRA con el decodificador completo (4.35 millones). No declara el rango de LoRA.
+* **Lo que aporta:**
+  * LoRA obtiene el mejor IoU entre cinco métodos, y concluye que hace falta ajustar el codificador. Coincide con nuestro salto en valid de 0.472 a 0.60 al agregar LoRA, aunque eso no prueba que la causa sea la misma.
+  * Explica el fallo de SAM original por su preferencia por objetos de bordes regulares, en línea con H1.
+  * Propone a futuro combinar LoRA en el codificador con otro ajuste en el decodificador. Nosotros ya entrenamos LoRA con el decodificador completo, aunque no es exactamente lo mismo.
+* **Dos cautelas sobre el texto:**
+  * El resumen dice que el IoU sube "from 70% to 90%", pero SAM original parte de 0.70 %. Esos 70 % y 90 % son el nivel de las dos regiones ya ajustadas.
+  * Una parte asocia el exceso de parámetros con el sobreajuste, y otra con el subajuste.
+
+| Tabla | Modelo | Recall | F1 reportado | IoU reportado | IoU esperado con su P y R |
+|---|---|---|---|---|---|
+| DeepSARFlood, test (Tabla 3) | Swin-V2 | 86.69 | 78.91 | 72.26 | 70.72 |
+| DeepSARFlood, Pakistán (Tabla 5) | Swin-V2 | 91.75 | 84.42 | 73.05 | 73.05 |
+| Wang, Weihui (Tabla 1) | LoRA | 83.61 | 82.67 | 76.61 | 70.45 |
+| Wang, Jubba (Tabla 2) | LoRA | 92.10 | 90.01 | **95.07** | 81.84 |
+| Wang, Jubba (Tabla 2) | Prompt | 37.68 | 51.44 | **91.29** | 34.63 |
+
+* **DeepSARFlood:** sus Tablas 5 y 6 cuadran exactas. En la Tabla 3, de donde sale el 0.72, el F1 reportado (78.91) tampoco coincide con el que dan su precisión y recall (82.85).
+* **Wang et al.:** su F1 sí cuadra en todas las filas, pero el IoU supera al F1 y al recall en 8 de 12 filas. Promediar sobre dos clases no lo explica en 7 de esas 8.
+
+**Efecto en nuestro trabajo:** ningún resultado cambia. Sigue en pie que no encontramos un resultado publicado de SAM sobre Sen1Floods11 con solo radar, y la búsqueda no fue exhaustiva.
 
 ## 6. Firmas del equipo sobre los pre-registros H4 y H5
 
